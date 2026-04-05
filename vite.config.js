@@ -1,0 +1,22 @@
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
+import { resolve } from 'path'
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  base: '/home/',
+  plugins: [
+    react(),
+    tailwindcss(),
+  ],
+  build: {
+    outDir: 'docs',
+    rollupOptions: {
+      input: {
+        main: resolve(__dirname, 'index.html'),
+        mobile: resolve(__dirname, 'mobile/index.html'),
+      },
+    },
+  },
+})
