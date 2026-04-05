@@ -1,5 +1,5 @@
-import React, { useMemo } from 'react';
-import { motion, useTime, useTransform } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, useMotionValue, useSpring, useTransform, animate } from 'framer-motion';
 
 const ecosystemNodes = [
   { img: "https://images.pexels.com/photos/7089401/pexels-photo-7089401.jpeg?auto=compress&cs=tinysrgb&w=400", label: "Healthcare" },
@@ -14,120 +14,130 @@ const ecosystemNodes = [
 ];
 
 const OrbitalEcosystemMobile = () => {
-  const radius = 220; // Reduced radius for better mobile fit
+  const radius = 280; 
   const totalCards = ecosystemNodes.length;
-  const time = useTime();
+  const cardAngle = 360 / totalCards;
   
-  // Create a pulsing rhythmic rotation (non-linear speed shifts)
-  const rotation = useTransform(time, [0, 10000, 20000, 30000, 40000], [0, 120, 180, 300, 360], { clamp: false });
+  // Interactive Physics State
+  const dragX = useMotionValue(0);
+  const rotationRaw = useTransform(dragX, (x) => x * 0.5); // Map drag distance to angle
+  const rotationSpring = useSpring(rotationRaw, { stiffness: 400, damping: 30 });
+  const [isHovered, setIsHovered] = useState(false);
+
+  // Auto-Orbit Logic
+  useEffect(() => {
+    if (!isHovered) {
+      const controls = animate(dragX, [dragX.get(), dragX.get() + 360], {
+        duration: 30,
+        repeat: Infinity,
+        ease: "linear"
+      });
+      return controls.stop;
+    }
+  }, [isHovered]);
+
+  const onDragStart = () => setIsHovered(true);
+  const onDragEnd = () => {
+    // Magnetic Snap: Force stop on a card notch
+    const currentRot = rotationRaw.get();
+    const snapRot = Math.round(currentRot / cardAngle) * cardAngle;
+    animate(dragX, snapRot * 2, { type: 'spring', stiffness: 300, damping: 30 });
+    
+    // Resume auto-orbit after 3s
+    setTimeout(() => setIsHovered(false), 3000);
+  };
 
   return (
-    <section className="py-24 w-full h-[700px] flex flex-col items-center justify-center relative overflow-hidden bg-black">
+    <section className="py-24 w-full h-[700px] flex flex-col items-center justify-center relative overflow-hidden bg-black touch-none">
       
-      <div className="absolute top-10 text-center z-50 px-6 w-full">
-        <h2 className="text-4xl font-black tracking-tight mb-2 text-white italic underline decoration-apple-blue/20">CONNECTED</h2>
-        <p className="text-white/40 uppercase tracking-[0.2em] text-[10px] font-bold">One Ecosystem • Every Device</p>
+      <div className="absolute top-10 text-center z-50 px-6 w-full pointer-events-none">
+        <h2 className="text-3xl font-bold tracking-tight mb-2">Connected Everywhere</h2>
+        <p className="text-white/60 text-sm">Grab and spin the ecosystem.</p>
       </div>
 
-      <div className="relative w-full h-full flex items-center justify-center scale-75 sm:scale-95 translate-y-[10%]">
-
+      <div className="relative w-[320px] h-[320px] flex items-center justify-center scale-[0.6] sm:scale-75 translate-y-[20%]">
         
-        {/* Center Support One Node */}
-        <div className="absolute m-auto w-72 h-72 rounded-full z-50 flex flex-col items-center justify-center bg-black/40 backdrop-blur-3xl p-6 text-center">
-            {/* Core Glow Particle */}
-            <motion.div 
-               animate={{ scale: [1, 1.4, 1], opacity: [0.1, 0.3, 0.1] }}
-               transition={{ duration: 4, repeat: Infinity }}
-               className="absolute inset-0 rounded-full bg-apple-blue/20 blur-3xl -z-10"
-            />
-            
-            {/* Triple Telemetry Rings */}
-            <motion.div 
-              className="absolute -inset-4 border border-apple-blue/10 rounded-full -z-10"
-              animate={{ rotate: 360 }}
-              transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-            />
-            <motion.div 
-              className="absolute -inset-8 border border-white/5 rounded-full -z-10"
-              animate={{ rotate: -360 }}
-              transition={{ duration: 45, repeat: Infinity, ease: 'linear' }}
-            />
-            
-            <h2 className="text-4xl font-black mb-1 text-white leading-tight relative z-20">
-               CORE <br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400 text-3xl">SUITE</span>
+        {/* Center Node */}
+        <div className="absolute m-auto w-64 h-64 rounded-full z-50 flex flex-col items-center justify-center shadow-[0_0_80px_rgba(10,132,255,0.3)] bg-black/90 border border-apple-blue/20 backdrop-blur-2xl p-6 text-center select-none pointer-events-none">
+            <h2 className="text-3xl font-black mb-2 text-white leading-tight">
+               Your <br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Software</span>
             </h2>
-            <div className="h-px w-12 bg-white/20 mb-2" />
-            <p className="text-[10px] font-bold text-apple-blue tracking-[0.2em] uppercase">Status: Unified</p>
+            <p className="text-[10px] text-white/30 uppercase tracking-[0.2em] font-bold">Interactive Control</p>
         </div>
 
-        {/* Orbit Group */}
-        <div className="relative w-full h-full flex items-center justify-center">
-          
+        {/* Orbit Wheel Wrapper (The Flywheel) */}
+        <motion.div 
+          drag="x"
+          dragConstraints={{ left: -Infinity, right: Infinity }}
+          onDragStart={onDragStart}
+          onDragEnd={onDragEnd}
+          style={{ rotateZ: rotationSpring, willChange: 'transform' }}
+          className="relative flex items-center justify-center z-10 cursor-grab active:cursor-grabbing"
+        >
           {/* Tracking Rings */}
-          <div className="absolute rounded-full border border-cyan-400/5" style={{ width: radius * 3.5, height: radius * 3.5 }} />
-          <div className="absolute rounded-full border border-cyan-400/10" style={{ width: radius * 2.5, height: radius * 2.5 }} />
-          <div className="absolute rounded-full border border-cyan-400/20" style={{ width: radius * 1.5, height: radius * 1.5 }} />
+          <div className="absolute rounded-full border border-dashed border-cyan-400/20" style={{ width: radius * 2.2, height: radius * 2.2 }} />
+          <div className="absolute rounded-full border border-cyan-400/10" style={{ width: radius * 2, height: radius * 2 }} />
 
-          {/* Individual Dynamic Cards */}
+          {/* Nodes */}
           {ecosystemNodes.map((node, index) => {
-            const baseAngle = (index / totalCards) * 360;
-            return <OrbitalCard key={index} index={index} baseAngle={baseAngle} radius={radius} rotation={rotation} node={node} />;
+            const angle = index * cardAngle;
+            const rad = (angle * Math.PI) / 180;
+            const x = Math.cos(rad) * radius;
+            const y = Math.sin(rad) * radius;
+
+            return (
+              <motion.div
+                key={index}
+                className="absolute w-44 h-32 bg-[#080808] border border-white/10 overflow-hidden shadow-[0_15px_30px_rgba(0,0,0,0.6)]"
+                style={{
+                  left: '50%',
+                  top: '50%',
+                  translateX: '-50%',
+                  translateY: '-50%',
+                  x: x, 
+                  y: y,
+                  rotateZ: angle + 90, 
+                  borderRadius: '24px',
+                  willChange: 'transform'
+                }}
+                whileTap={{ scale: 1.15, zIndex: 100, borderColor: "rgba(10, 132, 255, 0.8)" }}
+              >
+                {/* Visual Feedback on Tap: The Data-Ping */}
+                <motion.div 
+                   className="absolute inset-0 bg-apple-blue/5 opacity-0"
+                   whileTap={{ opacity: 1, scale: [1, 1.1, 1], transition: { duration: 0.3 } }}
+                />
+                
+                <img 
+                  src={node.img} 
+                  alt={node.label} 
+                  className="w-full h-full object-cover opacity-60"
+                  loading="lazy"
+                />
+                <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/90 via-black/40 to-transparent pointer-events-none" />
+                
+                <div className="absolute bottom-3 inset-x-0 w-full flex justify-center">
+                   <div className="bg-black/95 px-3 py-1 rounded-full border border-cyan-400/30">
+                       <span className="text-[10px] font-black text-white tracking-widest uppercase">{node.label}</span>
+                   </div>
+                </div>
+              </motion.div>
+            );
           })}
-        </div>
+        </motion.div>
       </div>
-    </section>
-  );
-};
 
-const OrbitalCard = ({ index, baseAngle, radius, rotation, node }) => {
-  // Combine base angle with the current master rotation
-  const angleValue = useTransform(rotation, (r) => (r + baseAngle) % 360);
-  
-  // Map x/y based on the combined angle
-  const x = useTransform(angleValue, (a) => Math.cos((a * Math.PI) / 180) * radius);
-  const y = useTransform(angleValue, (a) => Math.sin((a * Math.PI) / 180) * radius);
-  
-  // Depth Effects: Front (90deg) should be large and bright
-  const scale = useTransform(angleValue, [0, 90, 180, 270, 360], [0.8, 1.25, 0.8, 0.5, 0.8]);
-  const opacity = useTransform(angleValue, [0, 90, 180, 270, 360], [0.4, 1, 0.4, 0.2, 0.4]);
-  const zIndex = useTransform(angleValue, [0, 90, 180, 270, 360], [10, 50, 10, 5, 10]);
-  const blur = useTransform(angleValue, [0, 90, 180, 270, 360], ["blur(3px)", "blur(0px)", "blur(3px)", "blur(6px)", "blur(3px)"]);
-
-  return (
-    <motion.div
-      className="absolute w-48 h-36 bg-[#050505] border border-white/5 overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
-      style={{
-        left: '50%',
-        top: '50%',
-        translateX: '-50%',
-        translateY: '-50%',
-        x,
-        y,
-        scale,
-        opacity,
-        zIndex,
-        filter: blur,
-        borderRadius: '24px',
-        willChange: 'transform, opacity'
-      }}
-    >
-      <img src={node.img} alt={node.label} className="w-full h-full object-cover opacity-60 grayscale hover:grayscale-0 transition-all duration-700" />
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
-      
-      {/* Glint Effect Layer */}
+      {/* Touch Instruction */}
       <motion.div 
-        animate={{ x: ["-100%", "200%"] }}
-        transition={{ duration: 3, repeat: Infinity, ease: "linear", repeatDelay: 1 }}
-        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-[-20deg]"
-      />
-
-      <div className="absolute bottom-4 inset-x-0 w-full flex flex-col items-center gap-1">
-         <span className="text-[9px] font-black text-cyan-400 tracking-[0.3em] uppercase opacity-60">NODE {index + 1}</span>
-         <div className="bg-white/5 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
-             <span className="text-[11px] font-bold text-white tracking-wide">{node.label}</span>
-         </div>
-      </div>
-    </motion.div>
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.4 }}
+        className="absolute bottom-12 flex items-center gap-2 pointer-events-none"
+      >
+        <span className="w-12 h-[1px] bg-white/20" />
+        <span className="text-[9px] uppercase tracking-widest">Swipe left or right to explore</span>
+        <span className="w-12 h-[1px] bg-white/20" />
+      </motion.div>
+    </section>
   );
 };
 
