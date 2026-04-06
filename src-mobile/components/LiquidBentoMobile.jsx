@@ -47,32 +47,32 @@ const LiquidBentoMobile = () => {
         <p className="text-white/60">If you need it, we map it.</p>
       </div>
 
-      <div className="flex overflow-x-auto snap-x snap-mandatory hide-scrollbars pl-6 pr-6 gap-4 pb-8" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+      <div className="flex overflow-x-auto snap-x snap-mandatory hide-scrollbars pl-6 pr-6 gap-4 pb-8 transform-gpu" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
         {bentoItems.map((item, i) => (
           <motion.div
             key={i}
-            className={`min-w-[85vw] snap-center bg-[#080808] border border-white/10 glass-edge p-8 flex flex-col justify-between h-[320px] bg-gradient-to-br ${item.color} relative overflow-hidden`}
+            className={`min-w-[85vw] snap-center bg-[#080808] border border-white/5 p-8 flex flex-col justify-between h-[320px] bg-gradient-to-br ${item.color} relative overflow-hidden transform-gpu`}
             whileTap={{ scale: 0.98 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-            style={{ borderRadius: '32px', willChange: 'transform' }}
+            transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+            style={{ borderRadius: '32px', borderTopColor: 'rgba(255,255,255,0.1)', willChange: 'transform' }}
           >
             {/* Shimmer Ambient Data Layer */}
             <motion.div 
-              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent w-[200%] skew-x-[-20deg]"
-              animate={{ x: ['-100%', '100%'] }}
-              transition={{ duration: 3, repeat: Infinity, ease: 'linear', delay: i * 0.5 }}
+              className="absolute inset-x-[-100%] inset-y-0 bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-[-20deg]"
+              animate={{ x: ['-20%', '120%'] }}
+              transition={{ duration: 4, repeat: Infinity, ease: 'linear', delay: i * 0.5 }}
             />
             
-            <div className="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-md border border-white/10 mb-8 z-10 relative">
+            <div className="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center border border-white/10 mb-8 z-10 relative shadow-[0_0_15px_rgba(255,255,255,0.05)]">
               {item.icon}
             </div>
             
-            <div>
+            <div className="z-10 relative">
               <h3 className="text-2xl font-bold mb-3 tracking-tight">{item.title}</h3>
               <p className="text-lg text-white/70 leading-snug">{item.description}</p>
             </div>
             
-            <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-white/5 rounded-full blur-2xl pointer-events-none" />
+            <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-white/5 rounded-full blur-xl pointer-events-none" />
           </motion.div>
         ))}
       </div>

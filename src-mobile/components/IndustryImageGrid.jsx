@@ -23,26 +23,26 @@ const IndustryImageGrid = () => {
         {industries.map((ind, i) => (
           <motion.div
             key={ind.name}
-            className={`relative overflow-hidden group ${i === 0 || i === 5 ? 'col-span-2 h-[180px]' : 'h-[160px]'}`}
-            style={{ borderRadius: '20px' }}
-            initial={{ opacity: 0, scale: 0.9 }}
+            className={`relative overflow-hidden group transform-gpu ${i === 0 || i === 5 ? 'col-span-2 h-[180px]' : 'h-[160px]'}`}
+            style={{ borderRadius: '20px', willChange: 'transform, opacity' }}
+            initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-50px" }}
-            transition={{ delay: i * 0.08, type: 'spring', stiffness: 200, damping: 20 }}
-            whileTap={{ scale: 0.95 }}
+            transition={{ delay: i * 0.05, type: 'spring', stiffness: 150, damping: 20 }}
+            whileTap={{ scale: 0.98 }}
           >
             <img 
               src={ind.img} 
               alt={ind.name}
-              className="w-full h-full object-cover transition-transform duration-700 group-active:scale-110"
+              className="w-full h-full object-cover transform-gpu transition-transform duration-500 group-active:scale-105"
               loading="lazy"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-            <div className="absolute bottom-3 left-4 z-10">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+            <div className="absolute bottom-3 left-4 z-10 pointer-events-none">
               <span className="text-xs font-bold text-white tracking-wide">{ind.name}</span>
             </div>
-            <div className="absolute top-3 right-3 z-10">
-              <div className="w-2 h-2 rounded-full bg-green-400 shadow-[0_0_8px_rgba(52,199,89,1)]" />
+            <div className="absolute top-3 right-3 z-10 pointer-events-none">
+              <div className="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(52,199,89,0.6)]" />
             </div>
           </motion.div>
         ))}

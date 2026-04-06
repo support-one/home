@@ -60,9 +60,9 @@ const FounderCard = () => {
       </div>
       
       <motion.div
-        className="max-w-xs mx-auto cursor-pointer"
+        className="max-w-xs mx-auto cursor-pointer transform-gpu"
         onClick={() => setIsFlipped(!isFlipped)}
-        style={{ WebkitTapHighlightColor: 'transparent', perspective: '1200px' }}
+        style={{ WebkitTapHighlightColor: 'transparent', perspective: '1200px', willChange: 'transform, opacity' }}
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -72,12 +72,12 @@ const FounderCard = () => {
           animate={{ rotateY: isFlipped ? 180 : 0 }}
           transition={{ type: 'spring', stiffness: 180, damping: 25 }}
           style={{ transformStyle: 'preserve-3d' }}
-          className="relative w-full"
+          className="relative w-full transform-gpu"
         >
           {/* Front Side */}
           <div 
-            className="relative w-full rounded-[16px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.6)]"
-            style={{ backfaceVisibility: 'hidden', aspectRatio: '1.78 / 1' }}
+            className="relative w-full rounded-[16px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.4)] transform-gpu"
+            style={{ backfaceVisibility: 'hidden', aspectRatio: '1.78 / 1', willChange: 'transform' }}
           >
             <img 
               src={`${import.meta.env.BASE_URL}hemish-card.png`} 
@@ -89,8 +89,8 @@ const FounderCard = () => {
 
           {/* Back Side */}
           <div 
-            className="absolute inset-0 w-full rounded-[16px] overflow-hidden"
-            style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)', aspectRatio: '1.78 / 1' }}
+            className="absolute inset-0 w-full rounded-[16px] overflow-hidden transform-gpu"
+            style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)', aspectRatio: '1.78 / 1', willChange: 'transform' }}
           >
             <div className="w-full h-full bg-[#0a0e1a] p-6 flex flex-col justify-between border border-white/10 rounded-[16px]">
               <div className="flex items-center gap-3">
@@ -103,13 +103,13 @@ const FounderCard = () => {
 
               <div className="space-y-2 mt-2">
                 <a href="tel:9423372342" className="flex items-center gap-3 text-xs text-white/50 font-medium">
-                  <span className="text-white/20">📞</span> 9423372342
+                  <span className="text-white/20 text-sm">📞</span> 9423372342
                 </a>
-                <a href="https://www.hemishvora.com" className="flex items-center gap-3 text-xs text-white/50 font-medium">
-                  <span className="text-white/20">🌐</span> hemishvora.com
+                <a href="https://www.hemishvora.com" className="flex items-center gap-3 text-xs text-white/50 font-medium font-mono">
+                  <span className="text-white/20 text-sm">🌐</span> hemishvora.com
                 </a>
                 <a href="mailto:business.hemishvora@gmail.com" className="flex items-center gap-3 text-xs text-white/50 font-medium">
-                  <span className="text-white/20">✉️</span> business.hemishvora.gmail.com
+                  <span className="text-white/20 text-sm">✉️</span> business.hemishvora@gmail.com
                 </a>
               </div>
             </div>

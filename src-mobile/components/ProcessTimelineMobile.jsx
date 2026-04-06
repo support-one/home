@@ -23,17 +23,18 @@ const ProcessTimelineMobile = () => {
           return (
             <motion.div 
               key={index} 
-              className="relative pl-8"
-              initial={{ opacity: 0, x: -20 }}
+              className="relative pl-8 transform-gpu"
+              initial={{ opacity: 0, x: -15 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ delay: index * 0.15, type: "spring", stiffness: 300, damping: 25 }}
+              transition={{ delay: index * 0.1, type: "spring", stiffness: 150, damping: 25 }}
+              style={{ willChange: 'transform, opacity' }}
             >
               {/* Timeline dot */}
-              <div className="absolute top-1 -left-[9px] w-4 h-4 rounded-full bg-black border-2 border-apple-blue shadow-[0_0_10px_rgba(10,132,255,0.8)]" />
+              <div className="absolute top-1 -left-[9px] w-4 h-4 rounded-full bg-black border-2 border-apple-blue shadow-[0_0_8px_rgba(10,132,255,0.4)] transform-gpu" />
               
               <h3 className="text-xl font-bold tracking-tight mb-2 text-white">{item.step}</h3>
-              <p className="text-white/60 leading-relaxed text-sm bg-white/5 p-4 rounded-2xl border border-white/10 glass-edge">
+              <p className="text-white/60 leading-relaxed text-sm bg-[#080808] p-4 rounded-2xl border border-white/5 transform-gpu">
                 {item.desc}
               </p>
             </motion.div>

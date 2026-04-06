@@ -23,24 +23,25 @@ const HardwareStackMobile = () => {
         {stackItems.map((item, index) => (
           <motion.div
             key={item.platform}
-            className="material-regular p-5 glass-edge flex flex-col relative overflow-hidden group"
-            whileTap={{ scale: 0.95, rotateX: 5, z: -10 }}
+            className="material-regular p-5 glass-edge flex flex-col relative overflow-hidden group transform-gpu"
+            whileTap={{ scale: 0.98 }}
             style={{ 
               borderRadius: '24px', 
-              y: useTransform(scrollYProgress, [0.2, 0.8], [index * 20, -(index * 10)]) 
+              y: useTransform(scrollYProgress, [0.2, 0.8], [index * 15, -(index * 8)]),
+              willChange: 'transform, opacity'
             }}
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: -10 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-50px" }}
-            transition={{ delay: index * 0.1, type: 'spring', stiffness: 300, damping: 25 }}
+            transition={{ delay: index * 0.05, type: 'spring', stiffness: 150, damping: 25 }}
           >
-            <div className={`absolute top-0 right-0 w-32 h-32 rounded-full blur-[40px] opacity-20 -z-10
+            <div className={`absolute top-0 right-0 w-32 h-32 rounded-full blur-2xl opacity-10 -z-10 transform-gpu
               ${item.platform === 'Mobile' ? 'bg-blue-500' : 
                 item.platform === 'Desktop' ? 'bg-purple-500' : 
                 item.platform === 'Backend' ? 'bg-green-500' : 'bg-orange-400'}`} 
             />
 
-            <div className="flex justify-between items-end mb-4">
+            <div className="flex justify-between items-end mb-4 transform-gpu">
               <span className="text-2xl font-bold tracking-tight text-white">{item.platform}</span>
               <span className="text-[10px] font-mono tracking-widest text-apple-blue uppercase text-right max-w-[120px]">{item.performance}</span>
             </div>

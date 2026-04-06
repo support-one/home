@@ -40,7 +40,8 @@ const Section = ({ children, id }) => (
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, margin: "-50px" }}
     transition={{ duration: 0.5, ease: 'easeOut' }}
-    className="w-full relative py-12"
+    className="w-full relative py-12 transform-gpu"
+    style={{ willChange: 'transform, opacity' }}
   >
     {children}
   </motion.section>

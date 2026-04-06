@@ -14,8 +14,8 @@ const ProgressiveHeader = () => {
   const [activeSection, setActiveSection] = useState('home');
   const { scrollY } = useScroll();
   
-  const backdropBlur = useTransform(scrollY, [0, 80], ['blur(0px)', 'blur(24px)']);
-  const backgroundColor = useTransform(scrollY, [0, 80], ['rgba(10,10,10,0)', 'rgba(10,10,10,0.65)']);
+  const backdropBlur = useTransform(scrollY, [0, 80], ['blur(0px)', 'blur(12px)']);
+  const backgroundColor = useTransform(scrollY, [0, 80], ['rgba(10,10,10,0)', 'rgba(10,10,10,0.85)']);
   const borderOpacity = useTransform(scrollY, [0, 80], [0, 1]);
 
   useEffect(() => {
@@ -33,8 +33,6 @@ const ProgressiveHeader = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-
-
   const scrollTo = (id) => {
     setIsOpen(false);
     setTimeout(() => {
@@ -46,16 +44,17 @@ const ProgressiveHeader = () => {
   return (
     <>
       <motion.header 
-        className="fixed top-0 left-0 w-full z-50 pt-safe"
+        className="fixed top-0 left-0 w-full z-50 pt-safe transform-gpu"
         style={{ 
           backdropFilter: backdropBlur,
           WebkitBackdropFilter: backdropBlur,
           backgroundColor: backgroundColor,
+          willChange: 'backdrop-filter, background-color'
         }}
       >
-        <div className="px-6 py-4 flex justify-between items-center relative">
+        <div className="px-6 py-4 flex justify-between items-center relative transform-gpu">
           <motion.div 
-            className="flex items-center gap-2 cursor-pointer"
+            className="flex items-center gap-2 cursor-pointer transform-gpu"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: 'easeOut' }}
