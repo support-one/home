@@ -31,6 +31,7 @@ import CodeTerminalWindow from './components/CodeTerminalWindow';
 import DeliverableChecklist from './components/DeliverableChecklist';
 import DeviceFrameCarousel from './components/DeviceFrameCarousel';
 import FounderCard from './components/FounderCard';
+import FooterMobile from './components/FooterMobile';
 
 const Section = ({ children, id }) => (
   <motion.section
@@ -140,6 +141,7 @@ function App() {
           <FounderCard />
         </Section>
         
+        <FooterMobile />
       </main>
 
 
