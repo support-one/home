@@ -68,7 +68,6 @@ typings/
 
 # Build outputs
 dist
-docs
 tmp
 
 # OS files
