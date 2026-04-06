@@ -30,7 +30,7 @@ const OrbitalEcosystemMobile = () => {
       <div className="relative w-[320px] h-[320px] sm:w-[400px] sm:h-[400px] flex items-center justify-center scale-[0.6] sm:scale-75 translate-y-[20%]">
         
         {/* Center Node — Support One Logo */}
-        <div className="absolute m-auto w-64 h-64 rounded-full z-50 flex flex-col items-center justify-center shadow-[0_0_80px_rgba(10,132,255,0.3)] bg-black/80 border border-apple-blue/10 backdrop-blur-2xl p-8 text-center overlow-hidden">
+        <div className="absolute m-auto w-64 h-64 rounded-full z-50 flex flex-col items-center justify-center shadow-[0_0_40px_rgba(10,132,255,0.25)] bg-[#050505] border border-apple-blue/10 p-8 text-center overlow-hidden transform-gpu" style={{ willChange: 'transform' }}>
             <motion.div 
               className="absolute -inset-6 border-[0.5px] border-dashed border-apple-blue/10 rounded-full pointer-events-none -z-10"
               animate={{ rotate: -360 }}
@@ -52,17 +52,17 @@ const OrbitalEcosystemMobile = () => {
               <img 
                 src={`${import.meta.env.BASE_URL}support-one-logo.png`} 
                 alt="Support One" 
-                className="w-32 h-32 rounded-3xl shadow-[0_0_50px_rgba(10,132,255,0.4)]"
+                className="w-32 h-32 rounded-3xl shadow-[0_0_40px_rgba(10,132,255,0.3)]"
               />
               <motion.div 
-                className="absolute -inset-2 bg-apple-blue/20 rounded-full blur-2xl -z-10"
-                animate={{ opacity: [0.2, 0.5, 0.2] }}
+                className="absolute -inset-2 bg-apple-blue/15 rounded-full blur-xl -z-10"
+                animate={{ opacity: [0.2, 0.4, 0.2] }}
                 transition={{ duration: 3, repeat: Infinity }}
               />
             </motion.div>
 
            <motion.div 
-             animate={{ opacity: [0.1, 0.3, 0.1], scale: [1, 1.1, 1] }}
+             animate={{ opacity: [0.1, 0.2, 0.1], scale: [1, 1.05, 1] }}
              transition={{ duration: 5, repeat: Infinity }}
              className="absolute inset-1 border border-cyan-400/10 rounded-full z-40 pointer-events-none"
            />
@@ -73,17 +73,16 @@ const OrbitalEcosystemMobile = () => {
           initial={{ rotateZ: 0 }}
           animate={{ rotateZ: 360 }}
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="relative flex items-center justify-center z-10"
+          className="relative flex items-center justify-center z-10 transform-gpu"
           style={{ willChange: 'transform' }}
         >
           {/* Tracking Rings */}
           <motion.div 
             animate={{ rotateZ: -360 }}
             transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-            className="absolute rounded-full border border-dashed border-cyan-400/30" 
+            className="absolute rounded-full border border-dashed border-cyan-400/20" 
             style={{ width: radius * 2.2, height: radius * 2.2 }}
           />
-          <div className="absolute rounded-full border border-cyan-400/10" style={{ width: radius * 2, height: radius * 2 }} />
 
           {/* Cards */}
           {ecosystemNodes.map((node, index) => {
@@ -95,15 +94,15 @@ const OrbitalEcosystemMobile = () => {
             return (
               <motion.div
                 key={index}
-                className="absolute w-44 h-32 bg-[#080808] border border-white/10 overflow-hidden shadow-[0_15px_30px_rgba(0,0,0,0.6)] cursor-pointer"
+                className="absolute w-44 h-32 bg-[#080808] border border-white/5 overflow-hidden shadow-[0_10px_20px_rgba(0,0,0,0.5)] cursor-pointer transform-gpu"
                 initial={{ opacity: 0, scale: 0.1, x: 0, y: 0 }}
                 whileInView={{ opacity: 1, scale: 1, x: x, y: y }}
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: true, margin: "-50px" }}
                 transition={{ 
                   type: 'spring', 
-                  stiffness: 120, 
-                  damping: 18, 
-                  delay: 0.1 + (index * 0.08) 
+                  stiffness: 100, 
+                  damping: 20, 
+                  delay: 0.1 + (index * 0.05) 
                 }}
                 style={{
                   left: '50%',
@@ -114,7 +113,7 @@ const OrbitalEcosystemMobile = () => {
                   borderRadius: '24px',
                   willChange: 'transform'
                 }}
-                whileTap={{ scale: 1.1, zIndex: 60, borderColor: "rgba(10, 132, 255, 0.6)" }}
+                whileTap={{ scale: 1.05, zIndex: 60, borderColor: "rgba(10, 132, 255, 0.4)" }}
               >
                 <img 
                   src={node.img} 
