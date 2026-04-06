@@ -15,7 +15,7 @@ const ecosystemNodes = [
 
 const OrbitalEcosystemMobile = () => {
   // Use a mobile-optimized radius
-  const radius = 280; 
+  const radius = 240; 
   const totalCards = ecosystemNodes.length;
 
   return (
