@@ -33,15 +33,14 @@ const PlatformLogosStrip = () => {
         <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
         
         <motion.div
-          className="flex gap-12 items-center w-max transform-gpu"
+          className="flex gap-12 items-center w-max"
           animate={{ x: [0, -100 * platforms.length] }}
           transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
-          style={{ willChange: 'transform' }}
         >
           {doubled.map((p, i) => (
-            <div key={i} className="flex flex-col items-center gap-2 opacity-50 hover:opacity-100 transition-opacity transform-gpu" style={{ willChange: 'opacity' }}>
+            <div key={i} className="flex flex-col items-center gap-2 opacity-60 hover:opacity-100 transition-opacity">
               {p.svg}
-              <span className="text-[9px] uppercase tracking-[0.15em] text-white/30 font-bold">{p.name}</span>
+              <span className="text-[9px] uppercase tracking-[0.15em] text-white/40 font-bold">{p.name}</span>
             </div>
           ))}
         </motion.div>

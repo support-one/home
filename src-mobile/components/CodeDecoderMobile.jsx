@@ -35,16 +35,15 @@ const CodeDecoderMobile = () => {
         <h3 className="text-2xl font-bold tracking-tight mb-2">No Templates</h3>
         <p className="text-white/60 text-sm mb-6">Just code written for your exact needs.</p>
         
-        <div className="font-mono text-xs p-4 bg-[#050505] rounded-2xl border border-white/5 relative min-h-[100px] flex items-center transform-gpu">
+        <div className="font-mono text-xs p-4 bg-black/50 rounded-2xl border border-white/5 relative min-h-[100px] flex items-center">
           <AnimatePresence mode="wait">
              <motion.div
                key={isDecoded ? 'custom' : 'generic'}
-               initial={{ opacity: 0, y: 5 }}
-               animate={{ opacity: 1, y: 0 }}
-               exit={{ opacity: 0, y: -5 }}
-               transition={{ duration: 0.25 }}
-               className={isDecoded ? "text-green-400 transform-gpu" : "text-red-400 opacity-60 line-through decoration-red-500/50 transform-gpu"}
-               style={{ willChange: 'transform, opacity' }}
+               initial={{ opacity: 0, filter: "blur(10px)", y: 10 }}
+               animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+               exit={{ opacity: 0, filter: "blur(10px)", y: -10 }}
+               transition={{ duration: 0.3 }}
+               className={isDecoded ? "text-green-400" : "text-red-400 opacity-60 line-through decoration-red-500/50"}
              >
                {isDecoded ? customCodes[index] : genericCodes[index]}
              </motion.div>
@@ -52,21 +51,20 @@ const CodeDecoderMobile = () => {
         </div>
         
         <div className="mt-6 flex items-center justify-between">
-          <div className="flex items-center gap-3 transform-gpu">
+          <div className="flex items-center gap-3">
             <motion.div 
                animate={{ backgroundColor: isDecoded ? '#34C759' : '#FF3B30' }} 
-               className="w-2 h-2 rounded-full relative transform-gpu" 
+               className="w-2 h-2 rounded-full relative" 
             >
                {!isDecoded && (
                  <motion.div 
-                   className="absolute -inset-2 border border-[#FF3B30] rounded-full border-t-transparent transform-gpu"
+                   className="absolute -inset-2 border border-[#FF3B30] rounded-full border-t-transparent"
                    animate={{ rotate: 360 }}
-                   transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}
-                   style={{ willChange: 'transform' }}
+                   transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
                  />
                )}
             </motion.div>
-            <span className="text-[10px] uppercase tracking-widest text-white/50 font-bold transform-gpu">
+            <span className="text-xs uppercase tracking-widest text-white/50 font-bold">
               {isDecoded ? 'Bespoke Logic Validated' : 'Parsing Generic Bloat...'}
             </span>
           </div>

@@ -12,10 +12,9 @@ const TechMarqueeMobile = () => {
       
       <div className="flex w-[200vw]">
         <motion.div 
-          className="flex whitespace-nowrap gap-6 items-center transform-gpu"
+          className="flex whitespace-nowrap gap-6 items-center"
           animate={{ x: ["0%", "-50%"] }}
           transition={{ ease: "linear", duration: 15, repeat: Infinity }}
-          style={{ willChange: 'transform' }}
         >
           {/* Double array for seamless loop */}
           {[...techs, ...techs].map((tech, i) => (
@@ -32,10 +31,9 @@ const TechMarqueeMobile = () => {
       {/* Reverse Marquee */}
       <div className="flex w-[200vw] mt-4">
         <motion.div 
-          className="flex whitespace-nowrap gap-6 items-center transform-gpu"
+          className="flex whitespace-nowrap gap-6 items-center"
           animate={{ x: ["-50%", "0%"] }}
           transition={{ ease: "linear", duration: 20, repeat: Infinity }}
-          style={{ willChange: 'transform' }}
         >
           {[...techs, ...techs].reverse().map((tech, i) => (
             <div key={i} 
