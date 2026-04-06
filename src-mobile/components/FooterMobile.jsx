@@ -19,8 +19,8 @@ const FooterMobile = () => {
         <div className="flex items-center gap-3 mb-10">
           <img src={`${import.meta.env.BASE_URL}support-one-logo.png`} alt="S1" className="w-10 h-10 rounded-xl" />
           <div className="text-left">
-            <h4 className="text-xl font-bold tracking-tight text-white">Support One</h4>
-            <p className="text-[10px] text-white/30 uppercase font-black tracking-widest leading-none">Custom Software Studio</p>
+            <h4 className="text-xl font-display font-semibold tracking-wide text-white">Support One</h4>
+            <p className="text-[10px] text-white/30 uppercase font-black tracking-widest leading-none mt-1">Custom Software Studio</p>
           </div>
         </div>
 

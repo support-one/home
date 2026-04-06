@@ -1,7 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "SF Pro Display", "Inter", sans-serif;
+  --font-sans: "Satoshi", "Inter", sans-serif;
+  --font-display: "Clash Display", "SF Pro Display", sans-serif;
   
   --color-glass-base: rgba(18, 18, 18, 0.65);
   --color-glass-heavy: rgba(10, 10, 10, 0.85);
@@ -16,34 +17,28 @@
 }
 
 @layer base {
-html {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  overflow-x: hidden;
-  background-color: black;
-  scroll-behavior: smooth;
-}
+  html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+    background-color: black;
+    scroll-behavior: smooth;
+  }
 
-body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  min-height: 100%;
-  background-color: black;
-  @apply antialiased text-white;
-  position: relative;
-}
+  body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+    background-color: black;
+    @apply antialiased text-white font-sans;
+    position: relative;
+  }
 
-#root {
-  width: 100%;
-  position: relative;
-}
-
-  @font-face {
-    font-family: 'SF Pro Display';
-    src: local('San Francisco'), local('SF Pro Display');
-    font-weight: 100 900;
+  #root {
+    width: 100%;
+    position: relative;
   }
 }
 

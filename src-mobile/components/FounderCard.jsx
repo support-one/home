@@ -16,7 +16,7 @@ const FounderCard = () => {
     <section className="py-16 px-6 overflow-hidden">
       <div className="text-center mb-10">
         <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-apple-blue block mb-4">The Developer</span>
-        <h2 className="text-3xl font-bold tracking-tight mb-2">Meet the Builder</h2>
+        <h2 className="text-[32px] font-display font-bold tracking-tight mb-2">Meet the Builder</h2>
         <p className="text-white/60 text-sm">The person behind every line of code.</p>
       </div>
 
@@ -48,7 +48,7 @@ const FounderCard = () => {
           </div>
 
           <div className="absolute bottom-0 left-0 right-0 p-6">
-            <h3 className="text-xl font-black tracking-tighter text-white">Hemish Vora</h3>
+            <h3 className="text-2xl font-display font-semibold tracking-wide text-white">Hemish Vora</h3>
             <p className="text-[11px] text-apple-blue font-bold tracking-widest uppercase mt-1">Systems Developer</p>
           </div>
         </div>
@@ -96,7 +96,7 @@ const FounderCard = () => {
               <div className="flex items-center gap-3">
                 <img src={`${import.meta.env.BASE_URL}support-one-logo.png`} alt="S1" className="w-9 h-9 rounded-lg" />
                 <div>
-                  <p className="text-base font-black text-white leading-tight">Hemish Vora</p>
+                  <p className="text-lg font-display font-semibold text-white tracking-wide leading-tight">Hemish Vora</p>
                   <p className="text-[9px] text-apple-blue font-bold uppercase tracking-widest">Connect Directly</p>
                 </div>
               </div>

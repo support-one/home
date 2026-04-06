@@ -22,7 +22,7 @@ const OrbitalEcosystemMobile = () => {
     <section className="py-24 w-full h-[700px] flex flex-col items-center justify-center relative overflow-hidden bg-black">
       
       <div className="absolute top-10 text-center z-50 px-6 w-full">
-        <h2 className="text-3xl font-bold tracking-tight mb-2">Powering Every Industry</h2>
+        <h2 className="text-[32px] font-display font-semibold tracking-tight mb-2">Powering Every Industry</h2>
         <p className="text-white/60">One unified system. Every business vertical solved.</p>
       </div>
 

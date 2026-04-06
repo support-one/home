@@ -14,7 +14,7 @@ const ProcessTimelineMobile = () => {
   return (
     <section className="py-16 px-6 relative">
       <div className="mb-12 text-center">
-        <h2 className="text-3xl font-bold tracking-tight mb-2">How We Build</h2>
+        <h2 className="text-[32px] font-display font-bold tracking-tight mb-2">How We Build</h2>
         <p className="text-white/60">A bespoke process for custom software.</p>
       </div>
 

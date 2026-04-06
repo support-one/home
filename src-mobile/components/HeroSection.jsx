@@ -57,13 +57,13 @@ const HeroSection = () => {
         initial={{ opacity: 0, scale: 0.95, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ type: 'spring', stiffness: 200, damping: 20, delay: 0.1 }}
-        className="inline-flex material-thin px-4 py-1.5 mb-10 rounded-full text-[11px] font-bold tracking-[0.2em] uppercase text-white/70 glare-edge"
+        className="inline-flex material-thin px-4 py-1.5 mb-10 rounded-full text-[11px] font-bold tracking-[0.2em] font-display uppercase text-white/70 glare-edge"
       >
         No Generic Software.
       </motion.div>
 
       <motion.h1 
-        className="text-[42px] xs:text-5xl font-black tracking-tighter leading-[1.05] mb-6"
+        className="text-[44px] xs:text-5xl font-display font-semibold tracking-[-0.04em] leading-[1.05] mb-6"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ type: 'spring', stiffness: 300, damping: 25, delay: 0.2 }}

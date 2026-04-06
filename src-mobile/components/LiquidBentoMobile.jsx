@@ -43,7 +43,7 @@ const LiquidBentoMobile = () => {
   return (
     <section className="py-24 w-full overflow-hidden">
       <div className="px-6 mb-12">
-        <h2 className="text-3xl font-bold tracking-tight mb-2">What We Build</h2>
+        <h2 className="text-[32px] font-display font-bold tracking-tight mb-2">What We Build</h2>
         <p className="text-white/60">If you need it, we map it.</p>
       </div>
 
@@ -68,7 +68,7 @@ const LiquidBentoMobile = () => {
             </div>
             
             <div>
-              <h3 className="text-2xl font-bold mb-3 tracking-tight">{item.title}</h3>
+              <h3 className="text-2xl font-display font-semibold mb-3 tracking-wide">{item.title}</h3>
               <p className="text-lg text-white/70 leading-snug">{item.description}</p>
             </div>
             
