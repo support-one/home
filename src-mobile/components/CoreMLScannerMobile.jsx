@@ -1,71 +1,49 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 const CoreMLScannerMobile = () => {
-  const [scanPosition, setScanPosition] = useState(0);
-  const [isScanning, setIsScanning] = useState(true);
-
-  useEffect(() => {
-    if (!isScanning) return;
-    const interval = setInterval(() => {
-      setScanPosition(p => (p >= 100 ? 0 : p + 2));
-    }, 30);
-    return () => clearInterval(interval);
-  }, [isScanning]);
+  const { scrollYProgress } = useScroll();
+  // Animation triggers as the user scrolls through the section
+  const manualScale = useTransform(scrollYProgress, [0.75, 0.95], [1, 0.4]);
+  const manualOpacity = useTransform(scrollYProgress, [0.75, 0.95], [1, 0]);
+  const manualRotate = useTransform(scrollYProgress, [0.75, 0.95], [0, 15]);
 
   return (
-    <section className="py-16 px-6 relative overflow-hidden">
-      <div className="mb-8 text-center relative z-20">
-        <h2 className="text-3xl font-bold tracking-tight mb-2">Native Capabilities</h2>
-        <p className="text-white/60 text-sm">Deep hardware access out of the box.</p>
+    <section className="w-full py-20 px-6 flex flex-col items-center overflow-hidden">
+      <div className="text-center mb-12">
+        <h2 className="text-2xl font-bold mb-3 tracking-tight">Zero Onboarding</h2>
+        <p className="text-white/40 text-xs px-4 leading-relaxed line-clamp-3">Generic software forces rulebooks. Custom software is built exactly around how you already work. No manuals needed.</p>
       </div>
 
-      <div 
-        className="w-full max-w-[280px] h-[320px] mx-auto material-regular glass-edge rounded-[40px] relative overflow-hidden border border-white/20"
-        onPointerDown={() => setIsScanning(false)}
-        onPointerUp={() => setIsScanning(true)}
-        style={{ touchAction: 'none' }}
-      >
-        {/* Abstract Data Representation */}
-        <div className="w-full h-full flex flex-col justify-between p-8 opacity-40">
-          <div className="w-full h-2 bg-white/20 rounded-full" />
-          <div className="w-3/4 h-2 bg-white/20 rounded-full" />
-          <div className="w-full h-24 bg-white/10 rounded-xl" />
-          <div className="w-1/2 h-2 bg-white/20 rounded-full" />
-          <div className="w-full h-2 bg-white/20 rounded-full" />
+      <div className="relative w-full aspect-[4/5] flex items-center justify-center">
+        {/* Massive Confusing Manual */}
+        <motion.div 
+          className="w-48 h-64 bg-white rounded-lg shadow-2xl flex flex-col items-center p-6 absolute z-20"
+          style={{ scale: manualScale, opacity: manualOpacity, rotate: manualRotate }}
+        >
+           <h3 className="text-black font-black text-sm text-center uppercase tracking-tighter mb-4">Generic App Manual</h3>
+           <div className="w-full h-1 bg-gray-200 mb-2 rounded" />
+           <div className="w-3/4 h-1 bg-gray-200 mb-2 rounded" />
+           <div className="w-full h-1 bg-gray-200 mb-2 rounded" />
+           <div className="w-1/2 h-1 bg-gray-200 mb-2 rounded" />
+           <span className="mt-auto text-red-600 font-bold text-[8px] border-2 border-red-600 px-3 py-1 rounded-full rotate-12 scale-125">READ FIRST</span>
+        </motion.div>
+
+        {/* Revealed Custom App */}
+        <div className="w-56 h-80 border-4 border-white/5 bg-black rounded-[2.5rem] p-3 flex flex-col glass-edge relative z-10 overflow-hidden shadow-2xl">
+           <div className="w-16 h-4 bg-white/5 mx-auto rounded-b-xl mb-4" />
+           <div className="flex-1 w-full bg-gradient-to-br from-white/5 to-transparent rounded-2xl flex flex-col items-center justify-center border border-cyan-400/10">
+              <div className="w-12 h-12 rounded-full bg-cyan-400/10 flex items-center justify-center mb-3">
+                <svg className="w-6 h-6 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <span className="text-cyan-400 font-bold uppercase tracking-widest text-center text-[10px] px-4 leading-normal">
+                 Instantly Familiar
+                 <br /><span className="text-[8px] text-white/30 mt-1 block">Your Workflow, Native.</span>
+              </span>
+           </div>
         </div>
-
-        {/* Laser Scanner Line */}
-        {isScanning && (
-          <motion.div 
-            className="absolute left-0 right-0 h-[2px] bg-apple-blue shadow-[0_0_20px_#0A84FF]"
-            animate={{ top: `${scanPosition}%` }}
-            transition={{ duration: 0 }}
-          />
-        )}
-        
-        {/* Scanning Gradient Overlay */}
-        {isScanning && (
-          <motion.div 
-            className="absolute left-0 right-0 h-24 bg-gradient-to-t from-apple-blue/20 to-transparent pointer-events-none"
-            animate={{ top: `calc(${scanPosition}% - 6rem)` }}
-            transition={{ duration: 0 }}
-          />
-        )}
-
-        <div className="absolute inset-0 border-[4px] border-transparent rounded-[40px] pointer-events-none" />
-
-        <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 flex items-center gap-2">
-           <div className={`w-2 h-2 rounded-full ${isScanning ? 'bg-red-500 animate-pulse' : 'bg-green-500'}`} />
-           <span className="text-[10px] uppercase tracking-wider font-bold text-white/70">
-             {isScanning ? 'Scanning...' : 'Locked'}
-           </span>
-        </div>
-        
-        <p className="absolute bottom-6 w-full text-center text-xs font-semibold text-white/50 tracking-widest uppercase">
-          Hold to Freeze
-        </p>
-
       </div>
     </section>
   );
