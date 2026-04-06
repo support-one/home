@@ -38,10 +38,12 @@ const PlatformLogosStrip = () => {
           transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
           style={{ willChange: 'transform' }}
         >
+          {doubled.map((p, i) => (
             <div key={i} className="flex flex-col items-center gap-2 opacity-50 hover:opacity-100 transition-opacity transform-gpu" style={{ willChange: 'opacity' }}>
               {p.svg}
               <span className="text-[9px] uppercase tracking-[0.15em] text-white/30 font-bold">{p.name}</span>
             </div>
+          ))}
         </motion.div>
       </div>
     </section>
