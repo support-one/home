@@ -121,20 +121,33 @@ const HeroSection = () => {
 
 
 
-      {/* Modern Scroll Indicator */}
+      {/* Premium Mouse Scroll Indicator */}
       <motion.div 
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center justify-center opacity-50"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.5 }}
-        transition={{ delay: 1 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center justify-center"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 2, duration: 1 }}
       >
-        <span className="text-[9px] uppercase tracking-[0.3em] font-bold mb-3">Scroll</span>
-        <div className="w-[1px] h-12 bg-white/10 relative overflow-hidden">
+        <span className="text-[10px] uppercase tracking-[0.4em] font-black text-apple-blue/80 mb-4 animate-pulse">Explore</span>
+        
+        {/* Mouse Body */}
+        <div className="w-[28px] h-[48px] rounded-full border-2 border-white/10 flex justify-center p-1.5 relative shadow-[0_0_20px_rgba(10,132,255,0.1)]">
+           {/* Scroll Wheel Dot */}
            <motion.div 
-             className="w-full h-1/2 bg-apple-blue"
-             animate={{ y: [ -24, 48 ] }}
-             transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}
+             className="w-1.5 h-3 bg-apple-blue rounded-full shadow-[0_0_15px_rgba(10,132,255,0.8)]"
+             animate={{ 
+               y: [0, 16, 0],
+               opacity: [1, 0.4, 1]
+             }}
+             transition={{ 
+               duration: 2, 
+               repeat: Infinity, 
+               ease: "easeInOut" 
+             }}
            />
+           
+           {/* Inner Glow */}
+           <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-apple-blue/10 to-transparent rounded-t-full pointer-events-none" />
         </div>
       </motion.div>
 
