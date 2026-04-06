@@ -13,7 +13,7 @@ const HeroSection = () => {
     return () => clearInterval(timer);
   }, []);
   return (
-    <section className="relative pt-[calc(env(safe-area-inset-top)+80px)] px-6 pb-12 min-h-[90vh] flex flex-col items-center justify-center text-center overflow-hidden transform-gpu" style={{这将: 'transform' }}>
+    <section className="relative pt-[calc(env(safe-area-inset-top)+80px)] px-6 pb-12 min-h-[90vh] flex flex-col items-center justify-center text-center overflow-hidden transform-gpu" style={{ willChange: 'transform' }}>
       
       {/* Wave 1: Particle Mesh Background */}
       <div className="absolute inset-0 -z-10 pointer-events-none transform-gpu">
@@ -35,7 +35,7 @@ const HeroSection = () => {
               repeat: Infinity, 
               ease: "linear" 
             }}
-            style={{这将: 'transform' }}
+            style={{ willChange: 'transform' }}
           />
         ))}
       </div>
