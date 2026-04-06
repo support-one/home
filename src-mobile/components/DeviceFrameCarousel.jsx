@@ -61,62 +61,65 @@ const DeviceFrameCarousel = () => {
       </div>
 
       <div className="flex flex-col items-center">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeDevice}
-            className={`${device.frame} border-[#2a2a2a] bg-black relative overflow-hidden shadow-[0_30px_80px_rgba(0,0,0,0.9)]`}
-            initial={{ opacity: 0, scale: 0.8, rotateY: 30 }}
-            animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-            exit={{ opacity: 0, scale: 0.8, rotateY: -30 }}
-            transition={{ type: 'spring', stiffness: 150, damping: 25 }}
-          >
-            {/* Notch for iPhone */}
-            {device.notch && (
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[90px] h-[22px] bg-black rounded-b-[14px] z-20" />
-            )}
-
-            {/* Screen content */}
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={`${activeDevice}-${activeScreen}`}
-                className="absolute inset-0 flex flex-col items-center justify-center p-6"
-                style={{ background: `radial-gradient(circle at center, ${screen.color}20, transparent)` }}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.3 }}
-              >
-                <div 
-                  className="w-12 h-12 rounded-[14px] mb-4 flex items-center justify-center shadow-lg"
-                  style={{ backgroundColor: screen.color + '40' }}
+        {/* Fixed height container prevents layout shift across different device sizes */}
+        <div className="h-[380px] flex items-center justify-center relative w-full">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeDevice}
+              className={`${device.frame} border-[#2a2a2a] bg-black relative overflow-hidden shadow-[0_30px_80px_rgba(0,0,0,0.9)]`}
+              initial={{ opacity: 0, scale: 0.8, rotateY: 30 }}
+              animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+              exit={{ opacity: 0, scale: 0.8, rotateY: -30 }}
+              transition={{ type: 'spring', stiffness: 150, damping: 25 }}
+            >
+              {/* Notch for iPhone */}
+              {device.notch && (
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[90px] h-[22px] bg-black rounded-b-[14px] z-20" />
+              )}
+  
+              {/* Screen content */}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={`${activeDevice}-${activeScreen}`}
+                  className="absolute inset-0 flex flex-col items-center justify-center p-6"
+                  style={{ background: `radial-gradient(circle at center, ${screen.color}20, transparent)` }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
                 >
-                  <div className="w-4 h-4 rounded-full" style={{ backgroundColor: screen.color }} />
-                </div>
-                <span className="text-xs font-bold text-white/80 text-center">{screen.title}</span>
-                <span className="text-[9px] text-white/30 mt-1">Support One</span>
-                
-                {/* Fake UI lines */}
-                <div className="mt-4 space-y-2 w-full px-4">
-                  {[0.8, 0.6, 0.7, 0.5].map((w, i) => (
-                    <motion.div
-                      key={i}
-                      className="h-2 bg-white/10 rounded-full"
-                      style={{ width: `${w * 100}%` }}
-                      initial={{ scaleX: 0 }}
-                      animate={{ scaleX: 1 }}
-                      transition={{ delay: 0.3 + i * 0.1 }}
-                    />
-                  ))}
-                </div>
-              </motion.div>
-            </AnimatePresence>
-
-            {/* Home indicator */}
-            {device.notch && (
-              <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-[80px] h-[3px] bg-white/30 rounded-full z-20" />
-            )}
-          </motion.div>
-        </AnimatePresence>
+                  <div 
+                    className="w-12 h-12 rounded-[14px] mb-4 flex items-center justify-center shadow-lg transform-gpu"
+                    style={{ backgroundColor: screen.color + '40', willChange: 'transform' }}
+                  >
+                    <div className="w-4 h-4 rounded-full" style={{ backgroundColor: screen.color }} />
+                  </div>
+                  <span className="text-xs font-bold text-white/80 text-center">{screen.title}</span>
+                  <span className="text-[9px] text-white/30 mt-1">Support One</span>
+                  
+                  {/* Fake UI lines */}
+                  <div className="mt-4 space-y-2 w-full px-4">
+                    {[0.8, 0.6, 0.7, 0.5].map((w, i) => (
+                      <motion.div
+                        key={i}
+                        className="h-2 bg-white/10 rounded-full transform-gpu origin-left"
+                        style={{ width: `${w * 100}%`, willChange: 'transform' }}
+                        initial={{ scaleX: 0 }}
+                        animate={{ scaleX: 1 }}
+                        transition={{ delay: 0.3 + i * 0.1 }}
+                      />
+                    ))}
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+  
+              {/* Home indicator */}
+              {device.notch && (
+                <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-[80px] h-[3px] bg-white/30 rounded-full z-20" />
+              )}
+            </motion.div>
+          </AnimatePresence>
+        </div>
 
         {/* Device selector dots */}
         <div className="flex gap-3 mt-8">
