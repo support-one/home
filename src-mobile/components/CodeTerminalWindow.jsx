@@ -53,7 +53,7 @@ const CodeTerminalWindow = () => {
         </div>
 
         {/* Terminal Body */}
-        <div className="bg-[#0a0a0a] p-4 min-h-[280px] font-mono text-xs leading-relaxed">
+        <div className="bg-[#0a0a0a] p-4 h-[380px] font-mono text-xs leading-relaxed overflow-hidden">
           <AnimatePresence>
             {terminalLines.slice(0, visibleLines).map((line, i) => (
               <motion.div
