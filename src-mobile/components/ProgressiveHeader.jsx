@@ -7,7 +7,6 @@ const menuItems = [
   { label: 'Industries', target: 'industries', index: '03' },
   { label: 'Our Process', target: 'process', index: '04' },
   { label: 'The Developer', target: 'developer', index: '05' },
-  { label: 'Contact', target: 'contact', index: '06' },
 ];
 
 const ProgressiveHeader = () => {
@@ -175,7 +174,7 @@ const ProgressiveHeader = () => {
 
               <div className="mt-auto pt-6 border-t border-white/5">
                 <motion.button
-                  onClick={() => scrollTo('contact')}
+                  onClick={() => scrollTo('developer')}
                   className="w-full bg-white text-black py-4 rounded-2xl font-black uppercase text-xs tracking-widest"
                   whileTap={{ scale: 0.95 }}
                 >

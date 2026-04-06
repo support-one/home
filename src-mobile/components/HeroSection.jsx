@@ -98,6 +98,10 @@ const HeroSection = () => {
           transition={{ duration: 2, repeat: Infinity, ease: 'easeOut' }}
         />
         <motion.button 
+          onClick={() => {
+            const el = document.getElementById('developer');
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }}
           className="w-full material-thick py-6 px-6 text-white text-lg font-semibold flex justify-between items-center transition-all overflow-hidden relative group"
           whileTap={{ scale: 0.94, opacity: 0.8 }}
           initial={{ opacity: 0, y: 20 }}

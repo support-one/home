@@ -18,7 +18,7 @@ import TechMarqueeMobile from './components/TechMarqueeMobile';
 
 import ProcessTimelineMobile from './components/ProcessTimelineMobile';
 
-import BottomConversionMobile from './components/BottomConversionMobile';
+// import BottomConversionMobile from './components/BottomConversionMobile';
 
 // NEW Premium Visual Components
 import FloatingAppDock from './components/FloatingAppDock';
@@ -140,12 +140,6 @@ function App() {
           <FounderCard />
         </Section>
         
-        <SectionDivider />
-        
-        {/* === CONTACT === */}
-        <Section id="contact">
-          <BottomConversionMobile />
-        </Section>
       </main>
 
 
