@@ -29,21 +29,42 @@ const OrbitalEcosystemMobile = () => {
       {/* Scaled wrapper to ensure the orbit fits on mobile */}
       <div className="relative w-[320px] h-[320px] sm:w-[400px] sm:h-[400px] flex items-center justify-center scale-[0.6] sm:scale-75 translate-y-[20%]">
         
-        {/* Center Node */}
-        <div className="absolute m-auto w-64 h-64 rounded-full z-50 flex flex-col items-center justify-center shadow-[0_0_80px_rgba(10,132,255,0.3)] bg-black/80 border border-apple-blue/20 backdrop-blur-2xl p-6 text-center">
+        {/* Center Node — Support One Logo */}
+        <div className="absolute m-auto w-64 h-64 rounded-full z-50 flex flex-col items-center justify-center shadow-[0_0_80px_rgba(10,132,255,0.3)] bg-black/80 border border-apple-blue/10 backdrop-blur-2xl p-8 text-center overlow-hidden">
             <motion.div 
-              className="absolute -inset-4 border-2 border-dashed border-apple-blue/20 rounded-full pointer-events-none -z-10"
+              className="absolute -inset-6 border-[0.5px] border-dashed border-apple-blue/10 rounded-full pointer-events-none -z-10"
               animate={{ rotate: -360 }}
-              transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
+              transition={{ duration: 15, repeat: Infinity, ease: 'linear' }}
             />
             
-            <h2 className="text-3xl font-black mb-2 text-white leading-tight relative z-20">
-               Your <br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Software</span>
-            </h2>
+            <motion.div
+              className="relative z-30"
+              animate={{ 
+                y: [0, -8, 0],
+                rotate: [0, 2, 0, -2, 0]
+              }}
+              transition={{ 
+                duration: 6, 
+                repeat: Infinity, 
+                ease: "easeInOut" 
+              }}
+            >
+              <img 
+                src={`${import.meta.env.BASE_URL}support-one-logo.png`} 
+                alt="Support One" 
+                className="w-32 h-32 rounded-3xl shadow-[0_0_50px_rgba(10,132,255,0.4)]"
+              />
+              <motion.div 
+                className="absolute -inset-2 bg-apple-blue/20 rounded-full blur-2xl -z-10"
+                animate={{ opacity: [0.2, 0.5, 0.2] }}
+                transition={{ duration: 3, repeat: Infinity }}
+              />
+            </motion.div>
+
            <motion.div 
-             animate={{ opacity: [0.3, 0.6, 0.3], scale: [1, 1.05, 1] }}
-             transition={{ duration: 4, repeat: Infinity }}
-             className="absolute inset-2 border border-cyan-400/30 rounded-full z-40 pointer-events-none"
+             animate={{ opacity: [0.1, 0.3, 0.1], scale: [1, 1.1, 1] }}
+             transition={{ duration: 5, repeat: Infinity }}
+             className="absolute inset-1 border border-cyan-400/10 rounded-full z-40 pointer-events-none"
            />
         </div>
 
@@ -51,14 +72,14 @@ const OrbitalEcosystemMobile = () => {
         <motion.div 
           initial={{ rotateZ: 0 }}
           animate={{ rotateZ: 360 }}
-          transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
           className="relative flex items-center justify-center z-10"
           style={{ willChange: 'transform' }}
         >
           {/* Tracking Rings */}
           <motion.div 
             animate={{ rotateZ: -360 }}
-            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+            transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
             className="absolute rounded-full border border-dashed border-cyan-400/30" 
             style={{ width: radius * 2.2, height: radius * 2.2 }}
           />
@@ -75,13 +96,20 @@ const OrbitalEcosystemMobile = () => {
               <motion.div
                 key={index}
                 className="absolute w-44 h-32 bg-[#080808] border border-white/10 overflow-hidden shadow-[0_15px_30px_rgba(0,0,0,0.6)] cursor-pointer"
+                initial={{ opacity: 0, scale: 0.1, x: 0, y: 0 }}
+                whileInView={{ opacity: 1, scale: 1, x: x, y: y }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ 
+                  type: 'spring', 
+                  stiffness: 120, 
+                  damping: 18, 
+                  delay: 0.1 + (index * 0.08) 
+                }}
                 style={{
                   left: '50%',
                   top: '50%',
                   translateX: '-50%',
                   translateY: '-50%',
-                  x: x, 
-                  y: y,
                   rotateZ: angle + 90, 
                   borderRadius: '24px',
                   willChange: 'transform'
