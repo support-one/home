@@ -62,7 +62,7 @@ const ProgressiveHeader = () => {
             onClick={() => scrollTo('home')}
           >
             <img src={`${import.meta.env.BASE_URL}support-one-logo.png`} alt="Support One" className="w-8 h-8 rounded-lg" />
-            <span className="text-lg font-display font-semibold tracking-wide text-white">Support One</span>
+            <span className="text-lg font-bold tracking-tight text-white">Support One</span>
           </motion.div>
           
           <motion.button 
@@ -138,7 +138,7 @@ const ProgressiveHeader = () => {
               <div className="flex items-center gap-3 mb-10 pb-6 border-b border-white/5">
                 <img src={`${import.meta.env.BASE_URL}support-one-logo.png`} alt="S1" className="w-12 h-12 rounded-xl" />
                 <div>
-                  <p className="text-lg font-display font-semibold text-white tracking-wide">Support One</p>
+                  <p className="text-lg font-bold text-white tracking-tight">Support One</p>
                   <p className="text-[10px] text-white/30 uppercase font-black tracking-widest">Custom Apps</p>
                 </div>
               </div>
@@ -158,7 +158,7 @@ const ProgressiveHeader = () => {
                       <span className={`text-[10px] font-mono font-bold ${isActive ? 'text-apple-blue' : 'text-white/20'}`}>
                         {item.index}
                       </span>
-                      <span className={`text-[20px] font-display tracking-wide ${isActive ? 'text-white font-semibold' : 'text-white/40'}`}>
+                      <span className={`text-[17px] font-bold tracking-tight ${isActive ? 'text-white' : 'text-white/40'}`}>
                         {item.label}
                       </span>
                       {isActive && (

@@ -46,7 +46,7 @@ const SaasVsCustom = () => {
     <section className="py-24 px-6 overflow-hidden">
       <div className="text-center mb-10">
         <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-apple-blue block mb-4">The Difference</span>
-        <h2 className="text-[32px] font-display font-bold tracking-tight mb-2">Not A SaaS</h2>
+        <h2 className="text-3xl font-bold tracking-tight mb-2">Not A SaaS</h2>
         <p className="text-white/60">See why custom-built wins.</p>
       </div>
 
