@@ -20,7 +20,8 @@ const HeroSection = () => {
         {[...Array(20)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-1 h-1 bg-apple-blue/20 rounded-full"
+            className="absolute w-1 h-1 bg-apple-blue/20 rounded-full transform-gpu"
+            style={{ willChange: "transform" }}
             initial={{ 
               x: Math.random() * 100 + "%", 
               y: Math.random() * 100 + "%",

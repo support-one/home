@@ -52,7 +52,8 @@ const SectionDivider = () => (
       initial={{ x: "-100%" }}
       whileInView={{ x: "100%" }}
       transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-      className="absolute inset-0 w-1/3 bg-gradient-to-r from-transparent via-apple-blue/10 to-transparent"
+      className="absolute inset-0 w-1/3 bg-gradient-to-r from-transparent via-apple-blue/10 to-transparent transform-gpu"
+      style={{ willChange: 'transform' }}
     />
   </div>
 );

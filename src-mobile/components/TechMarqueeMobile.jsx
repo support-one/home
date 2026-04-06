@@ -12,7 +12,8 @@ const TechMarqueeMobile = () => {
       
       <div className="flex w-[200vw]">
         <motion.div 
-          className="flex whitespace-nowrap gap-6 items-center"
+          className="flex whitespace-nowrap gap-6 items-center transform-gpu"
+          style={{ willChange: 'transform' }}
           animate={{ x: ["0%", "-50%"] }}
           transition={{ ease: "linear", duration: 15, repeat: Infinity }}
         >
@@ -20,7 +21,6 @@ const TechMarqueeMobile = () => {
           {[...techs, ...techs].map((tech, i) => (
             <div key={i} 
               className="px-5 py-2.5 rounded-full bg-white/10 border border-white/5 text-sm font-semibold tracking-wide text-white/80"
-              style={{ willChange: 'transform' }}
             >
               {tech}
             </div>
@@ -31,14 +31,14 @@ const TechMarqueeMobile = () => {
       {/* Reverse Marquee */}
       <div className="flex w-[200vw] mt-4">
         <motion.div 
-          className="flex whitespace-nowrap gap-6 items-center"
+          className="flex whitespace-nowrap gap-6 items-center transform-gpu"
+          style={{ willChange: 'transform' }}
           animate={{ x: ["-50%", "0%"] }}
           transition={{ ease: "linear", duration: 20, repeat: Infinity }}
         >
           {[...techs, ...techs].reverse().map((tech, i) => (
             <div key={i} 
               className="px-5 py-2.5 rounded-full bg-white/10 border border-white/5 text-sm font-semibold tracking-wide text-white/60"
-              style={{ willChange: 'transform' }}
             >
               {tech}
             </div>

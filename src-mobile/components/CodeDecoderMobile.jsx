@@ -58,7 +58,8 @@ const CodeDecoderMobile = () => {
             >
                {!isDecoded && (
                  <motion.div 
-                   className="absolute -inset-2 border border-[#FF3B30] rounded-full border-t-transparent"
+                   className="absolute -inset-2 border border-[#FF3B30] rounded-full border-t-transparent transform-gpu"
+                   style={{ willChange: 'transform' }}
                    animate={{ rotate: 360 }}
                    transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
                  />

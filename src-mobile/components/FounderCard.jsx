@@ -39,7 +39,8 @@ const FounderCard = () => {
             <div className="relative w-2 h-2">
               <div className="w-2 h-2 rounded-full bg-green-400 shadow-[0_0_8px_rgba(52,199,89,0.8)]" />
               <motion.div 
-                className="absolute inset-0 rounded-full bg-green-400"
+                className="absolute inset-0 rounded-full bg-green-400 transform-gpu"
+                style={{ willChange: 'transform, opacity' }}
                 animate={{ scale: [1, 2.5], opacity: [0.6, 0] }}
                 transition={{ duration: 2, repeat: Infinity }}
               />

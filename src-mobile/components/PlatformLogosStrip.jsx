@@ -33,7 +33,8 @@ const PlatformLogosStrip = () => {
         <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
         
         <motion.div
-          className="flex gap-12 items-center w-max"
+          className="flex gap-12 items-center w-max transform-gpu"
+          style={{ willChange: "transform" }}
           animate={{ x: [0, -100 * platforms.length] }}
           transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
         >

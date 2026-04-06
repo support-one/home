@@ -58,7 +58,8 @@ const LiquidBentoMobile = () => {
           >
             {/* Shimmer Ambient Data Layer */}
             <motion.div 
-              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent w-[200%] skew-x-[-20deg]"
+              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent w-[200%] skew-x-[-20deg] transform-gpu"
+              style={{ willChange: 'transform' }}
               animate={{ x: ['-100%', '100%'] }}
               transition={{ duration: 3, repeat: Infinity, ease: 'linear', delay: i * 0.5 }}
             />

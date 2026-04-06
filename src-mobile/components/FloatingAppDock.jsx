@@ -54,8 +54,8 @@ const FloatingAppDock = () => {
             transition={{ delay: i * 0.08, type: 'spring', stiffness: 200, damping: 20 }}
           >
             <motion.div
-              className="w-[72px] h-[72px] rounded-[20px] flex items-center justify-center shadow-lg relative overflow-hidden"
-              style={{ backgroundColor: app.color }}
+              className="w-[72px] h-[72px] rounded-[20px] flex items-center justify-center shadow-lg relative overflow-hidden transform-gpu"
+              style={{ backgroundColor: app.color, willChange: 'transform' }}
               whileTap={{ scale: 0.85, rotate: -5 }}
               animate={{ y: [0, -6, 0] }}
               transition={{ 

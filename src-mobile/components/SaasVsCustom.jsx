@@ -88,9 +88,10 @@ const SaasVsCustom = () => {
               />
               <div className="w-20 h-0.5 bg-white/10 rounded-full overflow-hidden">
                 <motion.div
-                  className="h-full rounded-full"
+                  className="h-full rounded-full transform-gpu origin-left"
+                  style={{ willChange: 'transform' }}
                   animate={{ 
-                    width: ['0%', '100%'],
+                    scaleX: [0, 1],
                     backgroundColor: isCustom ? '#0A84FF' : '#FF3B30'
                   }}
                   transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}

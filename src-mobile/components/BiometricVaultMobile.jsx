@@ -45,7 +45,8 @@ const BiometricVaultMobile = () => {
             >
               <div className="w-20 h-20 mb-4 rounded-full bg-cyan-500/10 border border-cyan-400/30 flex items-center justify-center relative">
                 <motion.div 
-                   className="absolute inset-0 rounded-full border border-cyan-400/50"
+                   className="absolute inset-0 rounded-full border border-cyan-400/50 transform-gpu"
+                   style={{ willChange: 'transform, opacity' }}
                    animate={{ scale: [1, 1.4, 1], opacity: [0.5, 0, 0.5] }}
                    transition={{ duration: 2, repeat: Infinity }}
                 />
