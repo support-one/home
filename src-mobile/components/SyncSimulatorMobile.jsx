@@ -16,7 +16,7 @@ const SyncSimulatorMobile = () => {
 
   return (
     <section className="py-16 px-6">
-      <div className="material-regular glass-edge p-8 flex flex-col items-center max-w-sm mx-auto" style={{ borderRadius: '32px' }}>
+      <div className="material-regular glass-edge p-8 flex flex-col items-center w-full mx-auto" style={{ borderRadius: '32px' }}>
         
         <div className="text-center mb-8">
           <h3 className="text-2xl font-bold tracking-tight mb-2">Integration Engine</h3>

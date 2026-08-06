@@ -19,7 +19,7 @@ const HardwareStackMobile = () => {
         <p className="text-white/60">Mac, Windows, iOS, and Android.</p>
       </div>
 
-      <div className="relative space-y-4 max-w-sm mx-auto perspective-1000">
+      <div className="relative space-y-4 w-full mx-auto perspective-1000">
         {stackItems.map((item, index) => (
           <motion.div
             key={item.platform}

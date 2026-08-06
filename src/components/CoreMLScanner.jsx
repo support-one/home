@@ -1,45 +1,62 @@
-import React from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
-export default function CoreMLScanner() {
-  const { scrollYProgress } = useScroll();
-  // As user scrolls down, the manual shrinks and vanishes
-  const manualScale = useTransform(scrollYProgress, [0.6, 0.8], [1, 0]);
-  const manualOpacity = useTransform(scrollYProgress, [0.6, 0.8], [1, 0]);
+const CoreMLScanner = () => {
+  const [showManual, setShowManual] = useState(true);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setShowManual(prev => !prev);
+    }, 3000); // Toggle every 3 seconds
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <section className="w-full py-40 px-6 flex flex-col items-center">
-      <div className="max-w-4xl text-center mb-24">
-        <h2 className="text-4xl md:text-5xl font-bold mb-4">No More Training Manuals.</h2>
-        <p className="text-gray-400">Generic software forces your employees to read massive rulebooks to learn how to use it. Custom software is built exactly around how your employees already work. Scroll down to watch the manual disappear.</p>
+    <div className="w-full h-full bg-[#0a0a0a] border border-white/10 rounded-[28px] p-8 flex flex-col items-center justify-center hover:bg-[#0c0c0c] transition-colors duration-300">
+      <div className="text-center mb-8">
+        <h3 className="text-xl lg:text-2xl font-bold tracking-tight mb-2">Zero Onboarding</h3>
+        <p className="text-white/60 text-xs px-2 leading-relaxed">Built around how you already work. No manuals needed.</p>
       </div>
 
-      <div className="relative w-full max-w-2xl h-96 flex items-center justify-center">
-        
+      <div className="relative w-full aspect-[4/5] flex items-center justify-center">
         {/* Massive Confusing Manual */}
-        <motion.div 
-          className="w-80 h-96 bg-gray-200 rounded-lg shadow-[0_0_50px_rgba(255,255,255,0.2)] flex flex-col items-center justify-center p-8 absolute z-10"
-          style={{ scale: manualScale, opacity: manualOpacity }}
-        >
-           <h3 className="text-black font-black text-2xl text-center uppercase tracking-tighter">Generic App Manual</h3>
-           <div className="w-full h-2 bg-gray-400 mt-4 rounded" />
-           <div className="w-3/4 h-2 bg-gray-400 mt-2 rounded" />
-           <div className="w-full h-2 bg-gray-400 mt-2 rounded" />
-           <span className="mt-8 text-red-600 font-bold text-sm border-2 border-red-600 px-4 py-1 rounded-full rotate-12">"Read this first"</span>
-        </motion.div>
+        <AnimatePresence>
+          {showManual && (
+            <motion.div 
+              className="w-48 h-64 bg-white rounded-lg shadow-2xl flex flex-col items-center p-6 absolute z-20"
+              initial={{ scale: 0.8, opacity: 0, rotate: -5 }}
+              animate={{ scale: 1, opacity: 1, rotate: 0 }}
+              exit={{ scale: 0.4, opacity: 0, rotate: 15 }}
+              transition={{ duration: 0.5, ease: 'easeInOut' }}
+            >
+               <h3 className="text-black font-black text-sm text-center uppercase tracking-tighter mb-4">Generic App Manual</h3>
+               <div className="w-full h-1 bg-gray-200 mb-2 rounded" />
+               <div className="w-3/4 h-1 bg-gray-200 mb-2 rounded" />
+               <div className="w-full h-1 bg-gray-200 mb-2 rounded" />
+               <div className="w-1/2 h-1 bg-gray-200 mb-2 rounded" />
+               <span className="mt-auto text-red-600 font-bold text-[8px] border-2 border-red-600 px-3 py-1 rounded-full rotate-12 scale-125">READ FIRST</span>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Revealed Custom App */}
-        <div className="absolute w-80 h-[400px] border-4 border-gray-800 bg-black rounded-[3rem] p-4 flex flex-col">
-           <div className="w-32 h-6 bg-gray-800 mx-auto rounded-b-xl mb-8" />
-           <div className="flex-1 w-full bg-[#0a0a0a] rounded-xl flex items-center justify-center border border-cyan-400/20 shadow-[inset_0_0_30px_rgba(0,255,204,0.1)]">
-              <span className="text-cyan-400 font-bold uppercase tracking-widest text-center text-sm px-4">
+        <div className="w-56 h-80 border-4 border-white/5 bg-black rounded-[2.5rem] p-3 flex flex-col glass-edge relative z-10 overflow-hidden shadow-2xl">
+           <div className="w-16 h-4 bg-white/5 mx-auto rounded-b-xl mb-4" />
+           <div className="flex-1 w-full bg-gradient-to-br from-white/5 to-transparent rounded-2xl flex flex-col items-center justify-center border border-cyan-400/10">
+              <div className="w-12 h-12 rounded-full bg-cyan-400/10 flex items-center justify-center mb-3">
+                <svg className="w-6 h-6 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <span className="text-cyan-400 font-bold uppercase tracking-widest text-center text-[10px] px-4 leading-normal">
                  Instantly Familiar
-                 <br /><span className="text-[10px] text-gray-500 mt-2 block">Zero Onboarding Required</span>
+                 <br /><span className="text-[8px] text-white/30 mt-1 block">Your Workflow, Native.</span>
               </span>
            </div>
         </div>
-
       </div>
-    </section>
+    </div>
   );
-}
+};
+
+export default CoreMLScanner;

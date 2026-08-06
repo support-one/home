@@ -5,12 +5,18 @@ import { ChevronUp, X } from 'lucide-react';
 const BottomConversionMobile = () => {
   const [isOpen, setIsOpen] = useState(false);
 
+  React.useEffect(() => {
+    const handler = () => setIsOpen(true);
+    window.addEventListener('open-lets-talk', handler);
+    return () => window.removeEventListener('open-lets-talk', handler);
+  }, []);
+
   return (
     <section className="py-8 px-6 pb-16 flex justify-center w-full">
       
       <motion.button
         onClick={() => setIsOpen(true)}
-        className="w-full max-w-sm material-regular glass-edge py-5 px-6 flex justify-between items-center text-lg font-semibold active:scale-[0.98] transition-transform"
+        className="w-full mx-auto material-regular glass-edge py-5 px-6 flex justify-between items-center text-lg font-semibold active:scale-[0.98] transition-transform"
         style={{ borderRadius: '24px', WebkitTapHighlightColor: 'transparent' }}
       >
         <span className="text-vibrant tracking-tight">Let's Talk.</span>

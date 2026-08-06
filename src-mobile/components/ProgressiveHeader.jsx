@@ -6,7 +6,8 @@ const menuItems = [
   { label: 'What We Build', target: 'what-we-build', index: '02' },
   { label: 'Industries', target: 'industries', index: '03' },
   { label: 'Our Process', target: 'process', index: '04' },
-  { label: 'The Developer', target: 'developer', index: '05' },
+  { label: 'Projects', target: 'projects', index: '05' },
+  { label: 'The Developer', target: 'developer', index: '06' },
 ];
 
 const ProgressiveHeader = () => {

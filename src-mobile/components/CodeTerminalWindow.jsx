@@ -38,7 +38,7 @@ const CodeTerminalWindow = () => {
       </div>
 
       <motion.div
-        className="max-w-sm mx-auto rounded-[20px] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.8)] border border-white/10"
+        className="w-full mx-auto rounded-[20px] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.8)] border border-white/10"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}

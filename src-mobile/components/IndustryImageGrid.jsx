@@ -19,7 +19,7 @@ const IndustryImageGrid = () => {
         <p className="text-white/60">Healthcare to Hospitality. We map it.</p>
       </div>
 
-      <div className="grid grid-cols-2 gap-3 max-w-sm mx-auto">
+      <div className="grid grid-cols-2 gap-3 w-full mx-auto">
         {industries.map((ind, i) => (
           <motion.div
             key={ind.name}

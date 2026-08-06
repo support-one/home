@@ -51,7 +51,7 @@ const SaasVsCustom = () => {
       </div>
 
       {/* Toggle Switch */}
-      <div className="max-w-xs mx-auto mb-8">
+      <div className="w-full mx-auto mb-8">
         <div 
           className="relative bg-[#111] rounded-full p-1 flex border border-white/5 cursor-pointer"
           onClick={() => { setAutoPlay(false); setMode(m => m === 'saas' ? 'custom' : 'saas'); }}
@@ -103,7 +103,7 @@ const SaasVsCustom = () => {
       </div>
 
       {/* Comparison Cards */}
-      <div className="max-w-sm mx-auto space-y-3">
+      <div className="w-full mx-auto space-y-3">
         {comparisonData.map((row, i) => (
           <motion.div
             key={i}
@@ -185,7 +185,7 @@ const SaasVsCustom = () => {
 
       {/* Bottom Verdict */}
       <motion.div 
-        className="max-w-sm mx-auto mt-6 text-center"
+        className="w-full mx-auto mt-6 text-center"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}

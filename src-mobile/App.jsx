@@ -17,8 +17,9 @@ import CoreMLScannerMobile from './components/CoreMLScannerMobile';
 import TechMarqueeMobile from './components/TechMarqueeMobile';
 
 import ProcessTimelineMobile from './components/ProcessTimelineMobile';
+import TestimonialCards from '../src/components/TestimonialCards';
 
-// import BottomConversionMobile from './components/BottomConversionMobile';
+import BottomConversionMobile from './components/BottomConversionMobile';
 
 // NEW Premium Visual Components
 import FloatingAppDock from './components/FloatingAppDock';
@@ -137,11 +138,19 @@ function App() {
         
         <SectionDivider />
 
+        {/* === CLIENT TRUST / PROJECTS === */}
+        <Section id="projects">
+          <TestimonialCards />
+        </Section>
+        
+        <SectionDivider />
+
         {/* === DEVELOPER === */}
         <Section id="developer">
           <FounderCard />
         </Section>
         
+        <BottomConversionMobile />
         <FooterMobile />
       </main>
 

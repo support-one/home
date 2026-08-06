@@ -43,7 +43,7 @@ const FloatingAppDock = () => {
         <p className="text-white/60">Every tool custom-built for your workflow.</p>
       </div>
 
-      <div className="grid grid-cols-3 gap-4 max-w-xs mx-auto">
+      <div className="grid grid-cols-3 gap-4 w-full mx-auto">
         {apps.map((app, i) => (
           <motion.div
             key={app.name}

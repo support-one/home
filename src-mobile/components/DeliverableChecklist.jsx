@@ -21,7 +21,7 @@ const DeliverableChecklist = () => {
         <p className="text-white/60">Every project. Every time.</p>
       </div>
 
-      <div className="max-w-sm mx-auto space-y-3">
+      <div className="w-full mx-auto space-y-3">
         {deliverables.map((item, i) => (
           <motion.div
             key={i}

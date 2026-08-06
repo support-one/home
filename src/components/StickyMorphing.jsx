@@ -1,48 +1,64 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform, useSpring, useMotionValueEvent } from 'framer-motion';
+import React from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
-export default function StickyMorphing() {
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({ target: containerRef });
-  const smoothProgress = useSpring(scrollYProgress, { damping: 20, stiffness: 100 });
-
-  // Use progress (0 to 1) to determine border radius (Square -> Circle -> Thin Pill)
-  const borderRadius = useTransform(smoothProgress, [0, 0.5, 1], ["24px", "50%", "100px"]);
-  const rotate = useTransform(smoothProgress, [0, 1], [0, 360]);
-  const width = useTransform(smoothProgress, [0, 0.5, 1], ["200px", "300px", "100px"]);
-  const height = useTransform(smoothProgress, [0, 0.5, 1], ["200px", "300px", "400px"]);
-  const borderColor = useTransform(smoothProgress, [0, 0.5, 1], ["rgba(0,255,204,0.3)", "rgba(167,139,250,0.5)", "rgba(236,72,153,0.3)"]);
-
+const StickyMorphing = () => {
+  const { scrollYProgress } = useScroll();
+  
   return (
-    <section ref={containerRef} className="relative w-full h-[300vh] bg-black">
-      
-      {/* Sticky Container */}
-      <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
-        
-        {/* Background Text that scrolls by */}
-        <div className="absolute inset-0 flex flex-col items-center justify-between py-40 pointer-events-none opacity-20">
-          <h2 className="text-[10vw] font-black uppercase text-transparent bg-clip-text bg-white outline-text">Define</h2>
-          <h2 className="text-[10vw] font-black uppercase text-white">Execute</h2>
-          <h2 className="text-[10vw] font-black uppercase text-transparent bg-clip-text bg-white outline-text">Scale</h2>
+    <section className="py-24 px-6 relative h-[250vh]">
+      <div className="sticky top-24 flex flex-col items-center justify-center">
+        <div className="text-center mb-8 lg:mb-16">
+          <h2 className="text-3xl lg:text-5xl font-bold tracking-tight mb-2">Why Custom?</h2>
+          <p className="text-white/60 lg:text-xl">The edge over generic software.</p>
         </div>
 
-        {/* Morphing Centerpiece */}
-        <motion.div 
-          className="relative z-10 flex items-center justify-center bg-black/40 backdrop-blur-3xl shadow-[0_0_100px_rgba(0,255,204,0.1)] border-4"
-          style={{ 
-            width, height, borderRadius, rotate, borderColor,
-            boxShadow: "inset 0 0 50px rgba(255,255,255,0.05)"
-          }}
-        >
-          {/* Inner pulsating core */}
+        <div className="relative w-full max-w-sm lg:max-w-4xl h-[380px] lg:h-[500px]">
+          {/* Card 1 */}
           <motion.div 
-            className="w-1/2 h-1/2 bg-white/10 rounded-full blur-xl"
-            animate={{ scale: [1, 1.2, 1] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          />
-        </motion.div>
-        
+            className="absolute top-0 left-0 w-full h-[320px] lg:h-[400px] material-regular p-8 lg:p-16 rounded-[32px] lg:rounded-[48px] bg-gradient-to-br from-blue-500/20 to-transparent"
+            style={{ 
+              scale: useTransform(scrollYProgress, [0, 0.3], [1, 0.9]),
+              opacity: useTransform(scrollYProgress, [0, 0.3], [1, 0.5])
+            }}
+          >
+            <h3 className="text-2xl lg:text-5xl font-bold mb-4">Work Faster</h3>
+            <p className="text-white/70 lg:text-xl lg:max-w-md">No bloated menus. Your team uses exactly what they need.</p>
+            <div className="absolute bottom-8 right-8 text-5xl font-black text-white/20">Speed</div>
+          </motion.div>
+
+          {/* Card 2 */}
+          <motion.div 
+            className="absolute top-0 left-0 w-full h-[320px] lg:h-[400px] material-regular border-white/20 p-8 lg:p-16 rounded-[32px] lg:rounded-[48px] bg-gradient-to-br from-purple-500/20 to-transparent shadow-2xl"
+            style={{ 
+              y: useTransform(scrollYProgress, [0.2, 0.5], [400, 30]),
+              scale: useTransform(scrollYProgress, [0.4, 0.7], [1, 0.95]),
+            }}
+          >
+            <h3 className="text-2xl lg:text-5xl font-bold mb-4">Own Your Code</h3>
+            <p className="text-white/70 lg:text-xl lg:max-w-md">Stop paying per-seat subscriptions blindly. It's your asset.</p>
+            <div className="absolute bottom-8 right-8 text-5xl font-black text-white/20">Asset</div>
+          </motion.div>
+          
+          {/* Card 3 */}
+          <motion.div 
+            className="absolute top-0 left-0 w-full h-[320px] lg:h-[400px] material-thick p-8 lg:p-16 rounded-[32px] lg:rounded-[48px] bg-gradient-to-br from-green-500/20 to-transparent shadow-2xl border-white/30"
+            style={{ 
+              y: useTransform(scrollYProgress, [0.6, 0.9], [400, 60]),
+            }}
+          >
+            <h3 className="text-2xl lg:text-5xl font-bold mb-4">Grow Easily</h3>
+            <p className="text-white/70 lg:text-xl lg:max-w-md">As your business pivots, your custom software pivots with you.</p>
+            <div className="absolute bottom-8 right-8 w-16 h-16 rounded-full bg-apple-blue/20 flex items-center justify-center">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                <polyline points="17 6 23 6 23 12"></polyline>
+              </svg>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
-}
+};
+
+export default StickyMorphing;

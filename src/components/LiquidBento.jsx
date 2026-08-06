@@ -1,85 +1,95 @@
 import React from 'react';
-import { motion, useMotionTemplate, useMotionValue } from 'framer-motion';
-import { Shield, Zap, Lock } from 'lucide-react';
+import { motion } from 'framer-motion';
 
-function GlassCard({ title, desc, icon: Icon, span }) {
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  function handleMouseMove({ currentTarget, clientX, clientY }) {
-    const { left, top } = currentTarget.getBoundingClientRect();
-    mouseX.set(clientX - left);
-    mouseY.set(clientY - top);
+const bentoItems = [
+  {
+    title: 'Billing & ERPs',
+    description: 'Dashboards built just for your workflow.',
+    color: 'from-blue-500/20 to-blue-600/5',
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0A84FF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <line x1="12" y1="1" x2="12" y2="23"></line>
+        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+      </svg>
+    )
+  },
+  {
+    title: 'Internal Dashboards',
+    description: 'Tools your team actually wants to use.',
+    color: 'from-purple-500/20 to-purple-600/5',
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#AF52DE" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+        <circle cx="9" cy="7" r="4"></circle>
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+      </svg>
+    )
+  },
+  {
+    title: 'Mobile Apps',
+    description: 'Direct to consumer mobile apps for your brand.',
+    color: 'from-green-500/20 to-green-600/5',
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#34C759" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+        <line x1="12" y1="18" x2="12.01" y2="18"></line>
+      </svg>
+    )
   }
+];
 
+const LiquidBento = ({ hideHeader = false, className = "" }) => {
   return (
-    <div 
-      className={`relative group bg-white/[0.02] border border-white/10 rounded-3xl p-8 overflow-hidden backdrop-blur-xl transition-colors hover:border-white/20 ${span}`}
-      onMouseMove={handleMouseMove}
-    >
-      {/* Refractive Spotlight underneath the card */}
-      <motion.div
-        className="pointer-events-none absolute -inset-px rounded-3xl opacity-0 transition duration-300 group-hover:opacity-100"
-        style={{
-          background: useMotionTemplate`
-            radial-gradient(
-              600px circle at ${mouseX}px ${mouseY}px,
-              rgba(0, 255, 204, 0.15),
-              transparent 80%
-            )
-          `,
-        }}
-      />
-      <motion.div
-        className="pointer-events-none absolute inset-0 opacity-0 transition duration-500 group-hover:opacity-100 mix-blend-overlay"
-        style={{
-          background: useMotionTemplate`
-            radial-gradient(
-              300px circle at ${mouseX}px ${mouseY}px,
-              rgba(255, 255, 255, 0.8),
-              transparent 80%
-            )
-          `,
-        }}
-      />
+    <div className={`w-full ${className}`}>
+      {!hideHeader && (
+        <div className="px-6 mb-12">
+          <h2 className="text-3xl font-bold tracking-tight mb-2">What We Build</h2>
+          <p className="text-white/60">If you need it, we map it.</p>
+        </div>
+      )}
 
-      <div className="relative z-10">
-        <Icon className="w-10 h-10 text-cyan-400 mb-6 drop-shadow-[0_0_15px_rgba(0,255,204,0.5)]" />
-        <h3 className="text-2xl font-bold text-white mb-2">{title}</h3>
-        <p className="text-gray-400 leading-relaxed">{desc}</p>
+      <div className="flex overflow-x-auto snap-x snap-mandatory md:snap-none hide-scrollbars md:grid md:grid-cols-2 lg:grid-cols-3 pl-6 pr-6 gap-4 pb-8 md:overflow-visible max-w-7xl mx-auto" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+        {bentoItems.map((item, i) => (
+          <motion.div
+            key={i}
+            className={`min-w-[85vw] md:min-w-0 snap-center md:snap-none bg-[#080808] border border-white/10 glass-edge p-8 flex flex-col justify-between h-[320px] lg:h-full min-h-[300px] bg-gradient-to-br ${item.color} relative overflow-hidden rounded-[32px] lg:rounded-xl`}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+            style={{ willChange: 'transform' }}
+          >
+            {/* Shimmer Ambient Data Layer */}
+            <motion.div 
+              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent w-[200%] skew-x-[-20deg] transform-gpu"
+              style={{ willChange: 'transform' }}
+              animate={{ x: ['-100%', '100%'] }}
+              transition={{ duration: 3, repeat: Infinity, ease: 'linear', delay: i * 0.5 }}
+            />
+            
+            <div className="w-14 h-14 lg:w-16 lg:h-16 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-md border border-white/10 mb-8 z-10 relative">
+              <div className="scale-100 lg:scale-125 transition-transform">
+                {item.icon}
+              </div>
+            </div>
+            
+            <div>
+              <h3 className="text-2xl lg:text-xl font-bold mb-2 tracking-tight">{item.title}</h3>
+              <p className="text-lg lg:text-sm text-white/70 leading-snug">{item.description}</p>
+            </div>
+            
+            <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-white/5 rounded-full blur-2xl pointer-events-none" />
+          </motion.div>
+        ))}
       </div>
+      
+      <style dangerouslySetInnerHTML={{__html: `
+        .hide-scrollbars::-webkit-scrollbar {
+          display: none;
+        }
+      `}} />
     </div>
   );
-}
+};
 
-export default function LiquidBento() {
-  return (
-    <section className="w-full py-32 px-6 flex flex-col items-center">
-      <div className="max-w-6xl w-full text-center mb-20">
-        <h2 className="text-4xl md:text-5xl font-bold mb-4">Uncompromising Quality.</h2>
-        <p className="text-gray-400 max-w-2xl mx-auto text-lg">Discover the foundational pillars of our custom software. We build systems designed to scale with your ambition, completely free from the limits of off-the-shelf templates.</p>
-      </div>
-
-      <div className="grid md:grid-cols-3 gap-6 max-w-6xl w-full">
-        <GlassCard 
-          span="md:col-span-2 md:row-span-2 min-h-[300px] md:min-h-0 flex flex-col justify-end" 
-          title="100% Data Ownership" 
-          desc="Your custom software stores data on dedicated private servers that you exclusively control. No shared databases with competitors. No slow-downs from crowded networks. You own the system unconditionally." 
-          icon={Lock} 
-        />
-        <GlassCard 
-          span="md:col-span-1 min-h-[250px] md:h-auto" 
-          title="Iron-Clad Security" 
-          desc="Your business isn't standard, and neither is your safety. We implement top-tier protective measures tailored precisely to your industry compliance needs." 
-          icon={Shield} 
-        />
-        <GlassCard 
-          span="md:col-span-1 min-h-[250px] md:h-auto" 
-          title="Lightning Fast" 
-          desc="No bloatware. No unnecessary features weighing you down. Every line of code is optimized strictly for your specific daily workflow, resulting in blazing fast performance." 
-          icon={Zap} 
-        />
-      </div>
-    </section>
-  );
-}
+export default LiquidBento;

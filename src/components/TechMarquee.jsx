@@ -1,30 +1,52 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-export default function TechMarquee() {
-  const technologies = [
-    "Swift", "Kotlin", "React Native", "C#", "C++", "Objective-C", "Java", "Electron", "Figma", ".NET Core", "Node.js"
-  ];
+const techs = ['SwiftUI', 'Kotlin Flow', 'Metal', 'CoreML', 'Jetpack', 'Combine', 'ARKit'];
 
-  const repeatedTech = [...technologies, ...technologies];
-
+const TechMarquee = () => {
   return (
-    <div className="w-full py-10 bg-white/[0.02] border-y border-white/5 overflow-hidden flex flex-col items-center">
-      <p className="text-gray-500 uppercase tracking-widest text-xs font-bold mb-6">Technologies Engineered</p>
+    <section className="py-12 w-full overflow-hidden relative">
+      {/* Edge blur masks */}
+      <div className="absolute top-0 left-0 w-12 lg:w-32 h-full bg-gradient-to-r from-black to-transparent z-10" />
+      <div className="absolute top-0 right-0 w-12 lg:w-32 h-full bg-gradient-to-l from-black to-transparent z-10" />
       
-      <div className="relative w-full flex overflow-hidden group">
+      <div className="flex w-[200vw]">
         <motion.div 
-          className="flex whitespace-nowrap"
+          className="flex whitespace-nowrap gap-6 items-center transform-gpu"
+          style={{ willChange: 'transform' }}
           animate={{ x: ["0%", "-50%"] }}
-          transition={{ ease: "linear", duration: 30, repeat: Infinity }}
+          transition={{ ease: "linear", duration: 15, repeat: Infinity }}
         >
-          {repeatedTech.map((tech, idx) => (
-            <span key={idx} className="mx-8 text-2xl md:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-b from-gray-300 to-gray-700 opacity-50 hover:opacity-100 transition-opacity">
+          {/* Double array for seamless loop */}
+          {[...techs, ...techs].map((tech, i) => (
+            <div key={i} 
+              className="px-5 py-2.5 lg:px-8 lg:py-4 lg:rounded-xl rounded-full bg-white/10 border border-white/5 text-sm lg:text-xl font-semibold tracking-wide text-white/80"
+            >
               {tech}
-            </span>
+            </div>
           ))}
         </motion.div>
       </div>
-    </div>
+      
+      {/* Reverse Marquee */}
+      <div className="flex w-[200vw] mt-4">
+        <motion.div 
+          className="flex whitespace-nowrap gap-6 items-center transform-gpu"
+          style={{ willChange: 'transform' }}
+          animate={{ x: ["-50%", "0%"] }}
+          transition={{ ease: "linear", duration: 20, repeat: Infinity }}
+        >
+          {[...techs, ...techs].reverse().map((tech, i) => (
+            <div key={i} 
+              className="px-5 py-2.5 lg:px-8 lg:py-4 lg:rounded-xl rounded-full bg-white/10 border border-white/5 text-sm lg:text-xl font-semibold tracking-wide text-white/60"
+            >
+              {tech}
+            </div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
   );
-}
+};
+
+export default TechMarquee;

@@ -1,42 +1,45 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
-export default function TeamMatrix() {
-  const team = [
-    { name: "John Doe", title: "Principal Kotlin Engineer", skill: "10,000+ Hrs Android" },
-    { name: "Sarah Smith", title: "Swift Architecture Lead", skill: "Metal & Compute" },
-    { name: "Mike Tech", title: "C# / Desktop Engineer", skill: "Enterprise Windows" }
-  ];
+const profiles = [
+  { role: 'Systems Architect', detail: 'Maps existing bloated software workflows.' },
+  { role: 'Native Engineer', detail: 'Builds from scratch without templates.' },
+  { role: 'UI/UX Designer', detail: 'Creates frictionless business interfaces.' }
+];
 
+const TeamMatrix = () => {
   return (
-    <section className="w-full py-32 flex flex-col items-center">
-      <h2 className="text-4xl md:text-5xl font-bold mb-16">The Architects.</h2>
+    <section className="py-16 px-6 overflow-hidden">
+      <div className="mb-10 lg:mb-16 text-center">
+        <h2 className="text-3xl lg:text-5xl font-bold tracking-tight mb-2">Who Builds It</h2>
+        <p className="text-white/60 lg:text-xl">A dedicated team mapping your exact needs.</p>
+      </div>
 
-      <div className="max-w-6xl w-full grid md:grid-cols-3 gap-8 px-6">
-        {team.map((member, i) => (
-          <motion.div 
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-8 max-w-sm lg:max-w-6xl mx-auto">
+        {profiles.map((p, i) => (
+          <motion.div
             key={i}
-            className="group relative h-96 bg-[#0a0a0a] rounded-3xl border border-white/10 overflow-hidden cursor-crosshair"
-            whileHover={{ scale: 1.02 }}
+            className="material-thin glass-edge p-6 lg:p-10 rounded-3xl lg:rounded-[40px]"
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ delay: i * 0.1, type: "spring", stiffness: 300, damping: 25 }}
           >
-            {/* Fake Portrait Layer */}
-            <div className="absolute inset-0 bg-gray-800 opacity-100 group-hover:opacity-0 transition-opacity duration-300 flex items-center justify-center text-gray-500 font-bold tracking-widest uppercase">
-              Portrait.jpg
-            </div>
-
-            {/* Glitch Tech Layer */}
-            <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center font-mono text-cyan-400 p-6 text-center shadow-[inset_0_0_50px_rgba(0,255,204,0.1)]">
-              <div className="w-full h-full border border-cyan-400/20 bg-[url('https://www.transparenttextures.com/patterns/grid-me.png')] flex flex-col items-center justify-center p-4">
-                <span className="text-2xl font-bold mb-2 uppercase glitch-text">{member.name}</span>
-                <span className="text-white/80 text-sm mb-4">{member.title}</span>
-                <span className="bg-cyan-900/50 text-cyan-200 px-3 py-1 rounded-full text-xs border border-cyan-400/30">
-                  {member.skill}
-                </span>
+            <div className="flex items-center gap-4 mb-3">
+              <div className="w-10 h-10 lg:w-16 lg:h-16 rounded-full bg-apple-blue/20 flex items-center justify-center border border-apple-blue/50 flex-shrink-0">
+                <svg className="w-5 h-5 lg:w-8 lg:h-8" viewBox="0 0 24 24" fill="none" stroke="#0A84FF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
               </div>
+              <h3 className="font-bold text-lg lg:text-2xl">{p.role}</h3>
             </div>
+            <p className="text-white/60 text-sm lg:text-lg">{p.detail}</p>
           </motion.div>
         ))}
       </div>
     </section>
   );
-}
+};
+
+export default TeamMatrix;
