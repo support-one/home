@@ -59,10 +59,39 @@ const FounderCard = () => {
 
         {/* RIGHT COLUMN: Visiting Card (7 columns) */}
         <div className="lg:col-span-7">
-          <div className="text-center lg:text-left mb-6 lg:mb-10">
+          <div className="text-center lg:text-left mb-8 lg:mb-10 flex flex-col items-center lg:items-start">
              <h3 className="text-2xl lg:text-4xl font-bold tracking-tight mb-3 hidden lg:block">Connect Directly.</h3>
-             <p className="text-white/50 lg:text-lg hidden lg:block">Skip the sales team. Talk straight to the engineer building your system.</p>
-             <p className="text-[9px] uppercase tracking-[0.3em] font-bold text-white/20 block lg:hidden">Visiting Card</p>
+             <p className="text-white/50 lg:text-lg hidden lg:block mb-6">Skip the sales team. Talk straight to the engineer building your system.</p>
+             <p className="text-[9px] uppercase tracking-[0.3em] font-bold text-white/20 block lg:hidden mb-6">Visiting Card</p>
+
+             {/* Highly Visible AWS Badges */}
+             <div className="flex flex-col sm:flex-row items-center gap-4 w-full">
+               {/* AI Practitioner Badge */}
+               <div className="inline-flex items-center gap-4 bg-white/5 hover:bg-white/10 transition-colors border border-white/10 px-5 py-3 rounded-2xl shadow-lg w-full sm:w-auto">
+                  <img 
+                    src={`${import.meta.env.BASE_URL}aws-badge.png`} 
+                    alt="AWS Certified AI Practitioner" 
+                    className="w-12 h-12 drop-shadow-md"
+                  />
+                  <div className="text-left">
+                    <div className="text-[9px] font-bold text-apple-blue uppercase tracking-widest mb-0.5">Certified</div>
+                    <div className="text-sm font-bold text-white tracking-tight leading-tight">AWS AI Practitioner</div>
+                  </div>
+               </div>
+               
+               {/* Cloud Practitioner Badge */}
+               <div className="inline-flex items-center gap-4 bg-white/5 hover:bg-white/10 transition-colors border border-white/10 px-5 py-3 rounded-2xl shadow-lg w-full sm:w-auto">
+                  <img 
+                    src={`${import.meta.env.BASE_URL}aws-cloud-badge.png`} 
+                    alt="AWS Certified Cloud Practitioner" 
+                    className="w-12 h-12 drop-shadow-md"
+                  />
+                  <div className="text-left">
+                    <div className="text-[9px] font-bold text-apple-blue uppercase tracking-widest mb-0.5">Certified</div>
+                    <div className="text-sm font-bold text-white tracking-tight leading-tight">AWS Cloud Practitioner</div>
+                  </div>
+               </div>
+             </div>
           </div>
           
           <motion.div
